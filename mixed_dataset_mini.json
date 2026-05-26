@@ -1,147 +1,129 @@
 [
   {
-    "full_text": "Rhino Foods Rhino Foods Incorporated, founded in 1981 by Anne and Ted Castle, is a specialty ice cream novelty and ice cream ingredient manufacturer located in Burlington, Vermont, United States. Rhino Foods has grown from a small ice cream manufacturer to a prominent player in the industry, known for its innovative products and commitment to quality. The company specializes in creating unique ice cream ingredients, such as cookie dough, brownie batter, and various flavor inclusions that enhance the texture and taste of ice cream. Over the years, Rhino Foods has developed strong partnerships with major ice cream brands and artisanal producers alike, allowing them to expand their reach and contribute to some of the most beloved frozen treats in the market. Their dedicated team values sustainability and source ingredients responsibly, often prioritizing local farming practices and environmentally-friendly approaches in their production processes. In addition to their flagship products, Rhino Foods is constantly experimenting with new flavors and ingredient combinations, aiming to keep the ice cream experience fresh and exciting. Their commitment to innovation not only caters to growing consumer demands for new ice cream experiences but also helps pave the way for emerging trends in the dessert industry. As they look to the future, Rhino Foods remains focused on maintaining their high standards of quality while exploring new avenues for growth, including the development of plant-based alternatives and frozen desserts to cater to the evolving tastes of consumers. It’s this blend of tradition and innovation that continues to drive Rhino Foods’ success and solidify its reputation as a leader in the ice cream ingredients market.",
+    "full_text": "Rhino Foods Rhino Foods Incorporated, founded in 1981 by Anne and Ted Castle, is a specialty ice cream novelty and ice cream ingredient manufacturer located in Burlington, Vermont, United States. Rhino Foods has grown from a small ice cream shop, Chessy's Frozen Custard, into a business with over 150 employees. In 2013, the company became a certified B Corporation joining over a 1000 companies worldwide in the unified goal to use business as a force for good for people and the planet. Today, Rhino Foods is recognized for its innovative approach to ice cream production, offering a wide range of high-quality ingredients and unique novelty items to both commercial clients and consumers. The company’s product line includes premium ice cream bases, toppings, and specialty flavors, many of which are used by artisanal ice cream makers and foodservice operators across the country. Their commitment to sustainability extends beyond their B Corp certification— Rhino Foods sources ingredients from ethical suppliers, minimizes waste in production, and invests in eco-friendly packaging solutions. In addition to its core manufacturing operations, Rhino Foods has expanded into direct-to-consumer sales through its online store and retail presence in Vermont. The company also maintains a strong community focus, supporting local food initiatives, environmental conservation projects, and youth education programs. With a culture rooted in creativity, integrity, and environmental responsibility, Rhino Foods continues to evolve while staying true to its founding mission of making delicious, responsibly produced ice cream for everyone.",
     "labels": [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "qwen/qwen3-vl-30b-a3b-instruct"
+  },
+  {
+    "full_text": "Jon Mitchell Jon Mitchell is a British meteorologist and weather presenter for \"Calendar\" and \"Granada Reports\". He grew up in Morecambe in Lancashire, attending Lancaster Grammar School (since 1971 Lancaster Grammar School). Jon Mitchell started work with the Met Office on leaving school in 1978. At that time he described work as: \"We spent most of Jon Mitchell started work with the Met Office on leaving school in 1978. At that time, he described his work as: *\"We spent most of our time in the forecast office, poring over weather charts, satellite images, and telex reports from around the world. It was a fascinating mix of science and intuition—trying to predict the unpredictable.\"* After a few years with the Met Office, Jon transitioned into broadcasting, joining ITV’s *Calendar* in the late 1980s. His calm, authoritative presence and ability to explain complex weather patterns in simple terms quickly made him a trusted figure in Yorkshire and beyond. Over the years, he became a familiar face not just on *Calendar* but also on *Granada Reports*, where his forecasts were a staple for viewers in the North West. Beyond his on-screen work, Jon has been involved in various community and charity initiatives, often using his platform to raise awareness about climate change and extreme weather preparedness. Colleagues and viewers alike appreciate his dedication—whether it’s braving storm-force winds for a live broadcast or delivering a reassuring update during a heatwave. These days, Jon remains a respected voice in British weather forecasting, balancing his on-air duties with a passion for mentoring the next generation of meteorologists. His career, spanning over four decades, stands as a testament to his expertise, adaptability, and enduring commitment to keeping the public informed.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "mistralai/mixtral-8x22b-instruct"
+  },
+  {
+    "full_text": "Run of the House Run of the House is an American sitcom television series created by Betsy Thomas, that aired on The WB between September 11, 2003 and May 7, 2004. Nineteen episodes were produced but only sixteen were aired before the show was cancelled. The show was about a family of four siblings, who live together in their parents' house after their mom and dad move to Arizona, leaving the eldest brother in charge. The series followed the four siblings as they dealt with the ups and downs of young adulthood, dating, careers, and household chaos without constant parental oversight.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1
+    ],
+    "model": "x-ai/grok-4.3"
+  },
+  {
+    "full_text": "Kingdom of Sussex The Kingdom of the South Saxons, today referred to as the Kingdom of Sussex (; ), was one of the seven traditional kingdoms of the Heptarchy of Anglo-Saxon England. On the south coast of the island of Great Britain, it was originally a sixth-century Saxon colony and later an independent kingdom. The South Saxons were ruled by the kings of Sussex until the country was annexed by Wessex, probably in 827, in the aftermath of the Battle of the Battle of Ellendun in 825. This pivotal conflict between King Ecgberht of Wessex and King Beornwulf of Mercia resulted in a decisive victory for Wessex, effectively ending Mercian dominance over the southern kingdoms of Anglo-Saxon England. Following this triumph, Ecgberht's forces swiftly annexed Sussex, along with Kent, Essex, and Surrey, thereby consolidating Wessex's control over a significant portion of southern England. This expansion laid the groundwork for Wessex's emergence as the dominant power in the region, a status it would maintain for centuries to come.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "openai/gpt-4o-mini-search-preview"
+  },
+  {
+    "full_text": "Things Ain't What They Used to Be (And You Better Believe It) Things Ain't What They Used to Be is a 1970 studio album by the American jazz singer Ella Fitzgerald - the final album that Fitzgerald recorded on the Reprise Records label. The album was released in March 1970, marking a distinct moment in Fitzgerald's discography as she navigated the transition away from her legendary Verve catalog years toward a new contractual phase. The record is anchored by the novelty title track, a spirited number from the Shelly Winters musical *Mr. Wonderful*, which became the centerpiece of the project's marketing. The album features a blend of jazz standards, pop tunes, and soul-influenced selections, arranged by musicians including Bill Holman and Bill Miller. While it did not match the commercial heights of her earlier collaborations or songbook series, the album is recognized for Fitzgerald's vocal performance, particularly on the title song, where her playful delivery and technical mastery shine. Production duties were handled by Chuck Bright, and the sessions were recorded at Capitol Studios in Hollywood. *Things Ain't What They Used to Be* was followed by *Ella... and Her Friends* on the Verve label, signaling her return to the home where she had recorded the majority of her most celebrated work. The album stands as a bridge in her career, capturing the sound of the early 1970s while reaffirming her status as the \"First Lady of Song\" even as the musical landscape shifted around her.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "qwen/qwen3.6-flash"
+  },
+  {
+    "full_text": "Swabhimaan Swaabhimaan is an Indian soap opera directed by Mahesh Bhatt, and scripted by Shobha Swabhimaan Swaabhimaan is an Indian soap opera directed by Mahesh Bhatt, and scripted by Shobha Bachchan. Set in the beautiful city of Pune in the year 1995, this exhilarating period drama takes viewers on a journey through the intensely personal, yet universally relatable stories of its characters. The show chronicles the lives of Uma, a hardworking and ambitious woman looking to find a husband, and Shlok, a struggling writer trying to make ends meet. Played by the talented Madhu and Manisha Yadav respectively, Uma and Shlok's paths cross in unexpected ways, leading to a series of events that test their love, friendship, and aspirations. The beautiful blend of music, romance, drama, and comedy makes the show immensely popular, bringing together a diverse cast of characters from various backgrounds, each with their own stories and dreams. As the couple navigates family pressures, societal expectations, and their professional challenges, Swabhimaan Swaabhimaan touches the hearts of its audience with its poignant storytelling, compelling character arcs, and rich cultural backdrop. With its vivid and vivid cinematography, the show beautifully recreates the ambiance of 1990s India, capturing the essence of the time with immaculate attention to detail. The gripping plotlines, combined with its engaging music, keep viewers hooked from start to finish. Mahesh Bhatt's direction beautifully brings out the nuances of each scene, making the writing and performances even more impactful. With stunning costume and set designs, it truly solidified its place in the hearts of viewers in the truest sense. Undoubtedly, Swabhimaan Swaabhimaan has left an indelible mark in Indian soap opera history, holding a special place in the hearts of many television enthusiasts. For those yearning to reminisce or experience the good old times, this visual and emotional marvel is an excellent addition to the grand library of television classics.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "microsoft/phi-4-mini-instruct"
+  },
+  {
+    "full_text": "Arequipa Province Arequipa Nestled in the Andean landscape of southern Peru, Arequipa Province stands out as a region rich in cultural and natural heritage. Known affectionately for its iconic volcanoes, this province blends prehistoric ruins with vibrant local traditions. Travelers often find themselves captivated by the region’s distinctive red sandstone architecture, a testament to the ingenuity of its ancient inhabitants. Beyond the historical sites, the area boasts diverse ecosystems, offering opportunities to explore lush valleys and untouched nature. Local markets and bustling food scenes add another layer to the community feel, making it a destination where tradition meets contemporary life. Understanding the nuances of this province can reveal why it stands as both a historical treasure and a living, evolving community.",
+    "labels": [
+      0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "liquid/lfm-2.5-1.2b-instruct:free"
+  },
+  {
+    "full_text": "Trelkówko Trelkówko () is a village in the administrative district of Gmina Szczytno, within Trelkówko Trelkówko is a village in the administrative district of Gmina Szczytno, within Szczytno County, Warmian-Masurian Voivodeship, in northern Poland. The village is located approximately 10 kilometers southwest of Szczytno and 40 kilometers southeast of the regional capital Olsztyn. It is situated in the historic region of Masuria, known for its numerous lakes and forests.",
+    "labels": [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
-  },
-  {
-    "full_text": "Jon Mitchell Jon Mitchell is an accomplished writer and storyteller, known for his captivating narratives that blend elements of fiction with poignant truths about human experience. Hailing from a small coastal town, he draws inspiration from his surroundings, often incorporating themes of nature, resilience, and the complexities of relationships into his work. After earning his degree in creative writing, Jon began to pursue his passion full-time, publishing several acclaimed novels and short stories. His most recent work, \"Echoes of the Tide,\" has received widespread praise for its vivid imagery and emotional depth. Set against the backdrop of a mesmerizing seaside landscape, the story follows the intertwined lives of several characters as they navigate love, loss, and the healing power of community. Beyond his writing, Jon is an advocate for literacy and often visits schools to encourage young writers to find their voice. He believes in the transformative power of stories and hopes to inspire the next generation to share their own narratives. When he’s not writing or teaching, Jon enjoys hiking along the cliffs near his home, where the ocean meets the sky, fueling his creativity with the beauty of the world around him.",
-    "labels": [
-      0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
+    ],
+    "model": "mistralai/mistral-saba"
   },
   {
-    "full_text": "Run of the House Run of the House is an American sitcom television series created by Betsy Thomas, that aired on The WB between 2003 and 2004. The series revolves around the humorous challenges faced by a college student, Chris, who must navigate life while living with his carefree housemates in a college house. Each episode explores the dynamics of their relationships, the trials of adulthood, and the relentless pursuit of their dreams amidst the chaos of youth. The show's ensemble cast includes notable performances from actors such as Kyle Howard as Chris, who often finds himself playing the voice of reason, and a variety of eccentric personalities that contribute to the comedic atmosphere. The writing blends light-hearted humor with relatable themes, appealing to a young adult audience grappling with similar issues as they transition from adolescence to independence. Run of the House received mixed reviews during its run, praised for its quirky charm but critiqued for its occasionally predictable storylines. Despite its relatively short lifespan, the series developed a devoted following, especially among viewers who appreciated its comedic take on the ups and downs of university life. The nostalgic feel of the early 2000s, combined with memorable catchphrases and engaging story arcs, allowed it to resonate with audiences even after its cancellation. Although it wrapped up after just one season, Run of the House remains a curious footnote in the landscape of early 2000s sitcoms, often remembered for its unique approach to depicting the trials of young adulthood. In reruns and streaming platforms, it continues to find new fans, who enjoy its blend of humor and heartfelt moments.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
-  },
-  {
-    "full_text": "Kingdom of Sussex The Kingdom of the South Saxons, today referred to as Sussex, was a prominent kingdom during the early medieval period in England. Established in the 5th century, it played a crucial role in the formation of the cultural and political landscape of southern Britain. The kingdom's name derives from the Old English \"Sūþsēaxe,\" which translates to \"South Saxons,\" indicating its geographical positioning relative to other Saxon kingdoms. Throughout its history, Sussex was often characterized by its rolling hills, fertile farmlands, and a stunning coastline along the English Channel. The kingdom was marked by a series of tribal conflicts and alliances, particularly as neighboring kingdoms, like Wessex and Mercia, sought to expand their territories. The influence of neighboring cultures and trading with continental Europe had a significant impact on the social and economic structures within Sussex. Christianity began to take root in Sussex during the 7th century, particularly after the mission of St. Wilfrid, which slowly transformed the landscape of beliefs and practices among its inhabitants. Churches and monasteries became central to community life, contributing not only to spirituality but also to education and the preservation of knowledge. By the 9th century, Sussex had become part of the larger Anglo-Saxon hegemony, facing invasions from Viking forces but also managing to retain a distinct identity. The kingdom ultimately fell under the dominance of Wessex, but it continued to flourish in its own right, with regional governance and traditions that would influence future generations. Today, Sussex is known for its picturesque scenery, rich history, and vibrant culture, drawing visitors from around the world who wish to explore its historical sites, such as the remnants of castles, ancient churches, and museums that showcase its storied past. The legacy of the Kingdom of Sussex remains integral to understanding the broader narrative of England's history and its enduring heritage.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1
-    ]
-  },
-  {
-    "full_text": "Things Ain't What They Used to Be (And You Better Believe It) Things Ain't What They Used to Be is a 1970 studio album by the American jazz singer Ella Fitzgerald - the final album that Fitzgerald recorded on the Reprise Records label. The album was re-issued on CD with alternative artwork in 1989. It was released to a mix of critical acclaim and commercial success, highlighting Fitzgerald's enduring talent in a shifting musical landscape. The album features a blend of jazz standards and contemporary arrangements that showcase her exceptional vocal prowess and emotional depth. Among the standout tracks are \"The Man I Love\" and \"Someone to Watch Over Me,\" which reveal her ability to breathe new life into classic tunes while also reflecting the changing times in music and culture during the late 1960s and early 1970s. The production, which incorporates lush orchestration, aligns with the era's trends, yet Fitzgerald's distinct voice remains the focal point, reminding listeners of her unparalleled artistry. The re-issue in 1989 reintroduced the album to a new generation, complete with alternative artwork that paid homage to its original release while appealing to contemporary aesthetics. The remastered tracks allowed fans to appreciate the nuances of her voice in greater clarity, and it served as a reminder of Fitzgerald’s immense influence on both jazz and popular music. In the years following its initial release, \"Things Ain't What They Used to Be\" has been recognized not only as a testament to Fitzgerald's legacy but also as a reflection of the broader shifts occurring within the music industry during that era. Each listening experience invites nostalgia while also fostering an appreciation for the ways in which Fitzgerald's work transcended time to resonate with audiences long after its debut.",
+    "full_text": "Klondike Highway The Klondike Highway is a highway that runs from the Alaska Panhandle through the province of British Columbia and the territory of Yukon in Canada, linking the coastal town of Skagway, Alaska to Dawson City, Yukon. Its route somewhat parallels the route used by prospectors in the 1898 Klondike Gold Rush. In both British Columbia and Yukon, the highway is marked as Yukon Highway 2. In Alaska, the Highway is marked as Alaska Route 98 (as in \"route of 1898\"). Until 1978, Until 1978, the Klondike Highway ended at the Yukon–British Columbia border near Carcross, and travelers heading to Dawson City had to rely on seasonal riverboats, winter ice roads, or air travel to complete the journey. That year, the Canadian government completed an extension of the highway northward through the Yukon, connecting Whitehorse to Dawson City and finally providing year-round road access to the historic gold rush town. This development transformed Dawson City from an isolated outpost into a more accessible destination, bolstering tourism and supporting local economic development while preserving its rich heritage tied to the Klondike Gold Rush era.",
     "labels": [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
-  },
-  {
-    "full_text": "Swabhimaan Swaabhimaan is an Indian soap opera directed by Mahesh Bhatt, and scripted by Shobha De and Vinod Ranganath. Swaabhimaan divulges the story of an attractive woman - Svetlana - who finds herself in a battle where there are no real winners. Insecurity, suspicion and fear threaten to erode her vivacious spirit as she struggles to come to terms with the complex dynamics of her relationships and the expectations placed upon her by society. As the narrative unfolds, we witness Svetlana navigating a labyrinth of love, jealousy, and betrayal that ultimately forces her to confront her inner demons. The subplot introduces a cast of compelling characters, each adding layers to Svetlana's journey. Her supportive yet conflicted father grapples with his own past, while her ambitious sister is driven by envy and desire for recognition. Throughout the series, viewers are drawn into the tumultuous world of family loyalty and personal ambition, exploring how these themes intersect in often unexpected ways. As Svetlana faces betrayals from those she once trusted, she begins to evolve, transforming from a naive dreamer into a resilient woman determined to reclaim her life. The cinematography beautifully captures her emotional highs and lows, juxtaposed against the vibrant textures of urban India. Swabhimaan not only entertains but also serves as a mirror to the societal pressures many women face, asking the poignant question of whether true empowerment can coexist with vulnerability. With every episode, the show's gripping narrative holds audiences captive, inviting them to reflect on their own notions of self-worth and independence amidst an ever-changing landscape of relationships.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
-  },
-  {
-    "full_text": "Arequipa Province Arequipa is a province in the Arequipa Region, Peru. Its capital, Arequipa, is Peru's third most populous province of Peru. It borders the provinces of Islay, Camaná, Caylloma, and the Cusco and Puno regions. According to INEI in the year 2014 it has a population of 958.351 people. Some of the highest peaks of the province are Chachani, the Misti volcano and Pikchu Pikchu. Other mountains are listed below: The province is divided into twenty-nine districts, each with its own unique characteristics and cultural heritage. Among these districts, the most notable include Yanahuara, known for its picturesque traditional architecture and stunning views of the Misti volcano, and Cayma, which boasts a vibrant local market and rich culinary offerings. The region is renowned for its impressive colonial architecture, featuring beautifully crafted buildings made from sillar, a volcanic stone that lends a distinctive hue to the cityscape. Arequipa's historic center has been designated a UNESCO World Heritage Site due to its well-preserved baroque churches and plazas that tell the story of Spanish colonial influence. Aside from its historical significance, the province is a hub for outdoor activities, attracting tourists with opportunities for hiking, mountain biking, and exploring the nearby Colca Canyon, one of the deepest canyons in the world. This area is also famous for its wildlife, including the majestic Andean condor, which can often be seen soaring above the canyon. The local cuisine is another highlight, with dishes like rocoto relleno (stuffed spicy peppers) and adobo arequipeño (pork stew) drawing food lovers from around the country and beyond. As the gateway to the southern Andes, Arequipa Province offers a blend of natural beauty, rich culture, and warm hospitality, making it a must-visit destination in Peru.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
-  },
-  {
-    "full_text": "Trelkówko Trelkówko () is a village in the administrative district of Gmina Szczytno, within Szczytno County, Warmian-Masurian Voivodeship, in northern Poland. It lies approximately north of Szczytno and south-east of the regional capital Olsztyn. The village is nestled among picturesque forests and lakes, making it a serene place for those who enjoy nature. With a population that has remained small over the years, Trelkówko retains a close-knit community atmosphere, where neighbors often know each other by name. Local activities often include seasonal festivals that celebrate traditional Polish customs, showcasing folk music, dance, and regional cuisine. The surrounding landscape provides ample opportunities for outdoor recreation, such as hiking, fishing, and bird watching, attracting not only locals but also visitors seeking a peaceful getaway from the hustle and bustle of city life. Trelkówko's architecture reflects the rustic charm of rural Poland, with quaint cottages dotting the landscape and small farms contributing to the area’s agricultural heritage. In recent years, there has been a slight increase in interest from tourists eager to explore the natural beauty and historical sites of the Warmian-Masurian region, although the village has managed to retain its tranquil ambiance. Community events, such as markets and fairs, often highlight local crafts and products, encouraging sustainability and the promotion of regional artisans. As a result, Trelkówko remains a hidden gem for those looking to experience the authentic rural Polish lifestyle away from the more crowded tourist destinations.",
-    "labels": [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
-  },
-  {
-    "full_text": "Klondike Highway The Klondike Highway is a highway that runs from the Alaska Panhandle through the province of British Columbia and the territory of Yukon in Canada, linking the coastal town of Skagway, Alaska to Dawson City, Yukon. Its route somewhat follows the historic Gold Rush Trail, offering travelers a scenic journey through breathtaking landscapes marked by mountains, glacial lakes, and lush forests. The highway stretches approximately 160 miles (257 kilometers) and presents an amalgamation of natural beauty and historical significance. As adventurers traverse the Klondike Highway, they can expect to encounter numerous viewpoints and pullouts that showcase the stunning vistas, including the dramatic peaks of the Coast Mountain Range and the serene waters ofTagish Lake. Along the route, travelers may also spot wildlife such as moose, bears, and various bird species, making it a popular choice for nature enthusiasts and photographers. The towns along the highway, like Carcross and Dawson City, provide opportunities to delve into the rich history of the Klondike Gold Rush that drew thousands to the region in the late 1890s. Visitors can explore preserved historic buildings, learn about the challenges faced by those seeking fortune, and even try their hand at gold panning. In addition to its historical allure, the Klondike Highway is also renowned for recreational activities. In the summer months, hiking, fishing, and camping are popular pursuits, while in winter, the landscape transforms into a playground for snowmobiling, skiing, and ice fishing. The changing seasons unveil a dynamic environment, continually inviting exploration and adventure. Traveling along the Klondike Highway offers not just a route between two destinations, but an immersive experience into the heart of Canada's wilderness and its captivating history. Whether one is seeking solitude in nature or a glimpse into the past, this highway serves as a gateway to unforgettable moments.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ]
+      1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "qwen/qwen3-max-thinking"
   }
 ]
