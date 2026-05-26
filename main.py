@@ -3,12 +3,13 @@ import json
 import os
 import random
 import urllib.request
+import httpx
 from dotenv import load_dotenv
 from openai import APIStatusError, AsyncOpenAI, NotFoundError, RateLimitError
 
 load_dotenv()
 
-CONCURRENCY = 10
+DEFAULT_CONCURRENCY = 32
 MAX_MODEL_RETRIES = 10
 MODELS_API_URL = "https://openrouter.ai/api/v1/models?output_modalities=text"
 
@@ -22,10 +23,25 @@ def _get_api_key():
     return api_key
 
 
-def _get_client(api_key):
+def _get_concurrency(total_entries):
+    concurrency = int(os.environ.get("OPENROUTER_CONCURRENCY", DEFAULT_CONCURRENCY))
+    if concurrency < 1:
+        raise ValueError("OPENROUTER_CONCURRENCY must be at least 1.")
+    return min(concurrency, total_entries)
+
+
+def _get_client(api_key, concurrency):
+    http_client = httpx.AsyncClient(
+        limits=httpx.Limits(
+            max_connections=concurrency + 10,
+            max_keepalive_connections=concurrency,
+        ),
+        timeout=httpx.Timeout(120.0),
+    )
     return AsyncOpenAI(
         api_key=api_key,
         base_url="https://openrouter.ai/api/v1",
+        http_client=http_client,
     )
 
 
@@ -70,9 +86,11 @@ def _prepare_sequence(human_text):
     human_words = human_text.split()
     word_cutoff = random.randint(3, min(100, len(human_words)))
     human_subtext = " ".join(human_words[:word_cutoff])
+    words_needed = random.randint(10, 100)
     prompt = (
-        "Continue writing the following text naturally without repeating the prompt:\n\n"
-        f"{human_subtext}"
+        f"Continue writing the following text naturally. Generate exactly {words_needed} words, "
+        f"so that the final combined text reaches a grand total of {words_needed + word_cutoff} words. "
+        f"Do not repeat the prompt or the input text:\n\n{human_subtext}"
     )
     return human_words, word_cutoff, prompt
 
@@ -81,7 +99,7 @@ def _should_retry_with_another_model(exc):
     if isinstance(exc, (NotFoundError, RateLimitError)):
         return True
     if isinstance(exc, APIStatusError):
-        if exc.status_code in (403, 404, 502, 503):
+        if exc.status_code in (402, 403, 404, 502, 503):
             return True
         if exc.status_code == 400:
             message = str(exc).lower()
@@ -137,14 +155,28 @@ async def create_mixed_sequence(client, human_text, models, semaphore, failed_mo
     ) from last_error
 
 
-async def create_mixed_sequences(client, human_entries, models, concurrency=CONCURRENCY):
+async def create_mixed_sequences(client, human_entries, models, concurrency):
     semaphore = asyncio.Semaphore(concurrency)
     failed_models = set()
-    tasks = [
-        create_mixed_sequence(client, entry, models, semaphore, failed_models)
-        for entry in human_entries
-    ]
-    return await asyncio.gather(*tasks)
+    total = len(human_entries)
+    completed = 0
+    lock = asyncio.Lock()
+    results = [None] * total
+
+    async def run_one(index, entry):
+        nonlocal completed
+        result = await create_mixed_sequence(
+            client, entry, models, semaphore, failed_models
+        )
+        async with lock:
+            completed += 1
+            results[index] = result
+            pct = completed * 100 / total
+            print(f"\rProgress: {completed}/{total} ({pct:.1f}%)", end="", flush=True)
+
+    await asyncio.gather(*(run_one(i, entry) for i, entry in enumerate(human_entries)))
+    print()
+    return results
 
 
 async def main():
@@ -155,10 +187,17 @@ async def main():
         human_entries = json.load(f)
 
     api_key = _get_api_key()
-    client = _get_client(api_key)
+    concurrency = _get_concurrency(len(human_entries))
+    client = _get_client(api_key, concurrency)
     models = _get_models(api_key)
     print(f"Using {len(models)} OpenRouter chat models (random per entry).")
-    mixed_entries = await create_mixed_sequences(client, human_entries, models)
+    print(f"Processing {len(human_entries)} entries with {concurrency} parallel requests.")
+    try:
+        mixed_entries = await create_mixed_sequences(
+            client, human_entries, models, concurrency
+        )
+    finally:
+        await client.close()
 
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(mixed_entries, f, indent=2, ensure_ascii=False)

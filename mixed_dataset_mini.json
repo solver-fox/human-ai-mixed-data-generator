@@ -1,129 +1,103 @@
 [
   {
-    "full_text": "Rhino Foods Rhino Foods Incorporated, founded in 1981 by Anne and Ted Castle, is a specialty ice cream novelty and ice cream ingredient manufacturer located in Burlington, Vermont, United States. Rhino Foods has grown from a small ice cream shop, Chessy's Frozen Custard, into a business with over 150 employees. In 2013, the company became a certified B Corporation joining over a 1000 companies worldwide in the unified goal to use business as a force for good for people and the planet. Today, Rhino Foods is recognized for its innovative approach to ice cream production, offering a wide range of high-quality ingredients and unique novelty items to both commercial clients and consumers. The company’s product line includes premium ice cream bases, toppings, and specialty flavors, many of which are used by artisanal ice cream makers and foodservice operators across the country. Their commitment to sustainability extends beyond their B Corp certification— Rhino Foods sources ingredients from ethical suppliers, minimizes waste in production, and invests in eco-friendly packaging solutions. In addition to its core manufacturing operations, Rhino Foods has expanded into direct-to-consumer sales through its online store and retail presence in Vermont. The company also maintains a strong community focus, supporting local food initiatives, environmental conservation projects, and youth education programs. With a culture rooted in creativity, integrity, and environmental responsibility, Rhino Foods continues to evolve while staying true to its founding mission of making delicious, responsibly produced ice cream for everyone.",
+    "full_text": "Rhino Foods Rhino Foods Incorporated, founded in 1981 by Anne and Ted Castle, is a specialty ice cream novelty and ice cream ingredient manufacturer located in Burlington, Vermont, United States. Rhino Foods has grown from a small ice cream shop, Chessy's Frozen Custard, into a business with over 150 employees. In 2013, the company became a certified B Corporation joining over a 1000 companies worldwide in the unified goal to use business as a force for good for people and the planet. The company is best known locally for their ice cream bars and innovative flavors, which have earned them a loyal customer base. Rhino Foods also emphasizes sustainable practices, community engagement, and employee well-being in all facets of their operations.",
     "labels": [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     ],
-    "model": "qwen/qwen3-vl-30b-a3b-instruct"
+    "model": "openai/gpt-4.1-mini"
   },
   {
-    "full_text": "Jon Mitchell Jon Mitchell is a British meteorologist and weather presenter for \"Calendar\" and \"Granada Reports\". He grew up in Morecambe in Lancashire, attending Lancaster Grammar School (since 1971 Lancaster Grammar School). Jon Mitchell started work with the Met Office on leaving school in 1978. At that time he described work as: \"We spent most of Jon Mitchell started work with the Met Office on leaving school in 1978. At that time, he described his work as: *\"We spent most of our time in the forecast office, poring over weather charts, satellite images, and telex reports from around the world. It was a fascinating mix of science and intuition—trying to predict the unpredictable.\"* After a few years with the Met Office, Jon transitioned into broadcasting, joining ITV’s *Calendar* in the late 1980s. His calm, authoritative presence and ability to explain complex weather patterns in simple terms quickly made him a trusted figure in Yorkshire and beyond. Over the years, he became a familiar face not just on *Calendar* but also on *Granada Reports*, where his forecasts were a staple for viewers in the North West. Beyond his on-screen work, Jon has been involved in various community and charity initiatives, often using his platform to raise awareness about climate change and extreme weather preparedness. Colleagues and viewers alike appreciate his dedication—whether it’s braving storm-force winds for a live broadcast or delivering a reassuring update during a heatwave. These days, Jon remains a respected voice in British weather forecasting, balancing his on-air duties with a passion for mentoring the next generation of meteorologists. His career, spanning over four decades, stands as a testament to his expertise, adaptability, and enduring commitment to keeping the public informed.",
+    "full_text": "Jon Mitchell Jon Mitchell is a British meteorologist and weather presenter for \"Calendar\" and \"Granada Reports\". Jon Mitchell is a British meteorologist and weather presenter for \"Calendar\" and \"Granada Reports\". He joined the team in 2015 after working at the Met Office, where he specialized in flood forecasting and severe weather warnings. Known for his calm delivery and clear explanations, Mitchell quickly became a viewer favorite across the North West. His passion for climate science often leads him to discuss long-term environmental changes during broadcasts, making complex topics accessible. Outside work, he enjoys hiking in the Lake District and advocates for better weather education in schools.",
     "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1
+      1, 1, 1, 1, 1, 1
     ],
-    "model": "mistralai/mixtral-8x22b-instruct"
+    "model": "x-ai/grok-4.20"
   },
   {
-    "full_text": "Run of the House Run of the House is an American sitcom television series created by Betsy Thomas, that aired on The WB between September 11, 2003 and May 7, 2004. Nineteen episodes were produced but only sixteen were aired before the show was cancelled. The show was about a family of four siblings, who live together in their parents' house after their mom and dad move to Arizona, leaving the eldest brother in charge. The series followed the four siblings as they dealt with the ups and downs of young adulthood, dating, careers, and household chaos without constant parental oversight.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1
-    ],
-    "model": "x-ai/grok-4.3"
-  },
-  {
-    "full_text": "Kingdom of Sussex The Kingdom of the South Saxons, today referred to as the Kingdom of Sussex (; ), was one of the seven traditional kingdoms of the Heptarchy of Anglo-Saxon England. On the south coast of the island of Great Britain, it was originally a sixth-century Saxon colony and later an independent kingdom. The South Saxons were ruled by the kings of Sussex until the country was annexed by Wessex, probably in 827, in the aftermath of the Battle of the Battle of Ellendun in 825. This pivotal conflict between King Ecgberht of Wessex and King Beornwulf of Mercia resulted in a decisive victory for Wessex, effectively ending Mercian dominance over the southern kingdoms of Anglo-Saxon England. Following this triumph, Ecgberht's forces swiftly annexed Sussex, along with Kent, Essex, and Surrey, thereby consolidating Wessex's control over a significant portion of southern England. This expansion laid the groundwork for Wessex's emergence as the dominant power in the region, a status it would maintain for centuries to come.",
+    "full_text": "Run of the House Run of the House is an American sitcom television series created by Betsy Thomas, that aired on The WB between September 11, 2003 and May 7, 2004. Nineteen episodes were produced but only sixteen were aired before the show was cancelled. The show was about a family of four siblings, whose parents moved from Grand Rapids, Michigan, to Arizona, because the weather would be better there for their father's health. But they left the Run of the House Run of the House is an American sitcom television series created by Betsy Thomas, that aired on The WB between September 11, 2003 and May 7, 2004. Nineteen episodes were produced but only sixteen were aired before the show was cancelled. The show was about a family of four siblings, whose parents moved from Grand Rapids, Michigan, to Arizona, because the weather would be better there for their father's health. But they left the **Continuation (19 words):** But they left behind their old life in search of new opportunities and happiness in the desert Southwest.",
     "labels": [
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ],
-    "model": "openai/gpt-4o-mini-search-preview"
-  },
-  {
-    "full_text": "Things Ain't What They Used to Be (And You Better Believe It) Things Ain't What They Used to Be is a 1970 studio album by the American jazz singer Ella Fitzgerald - the final album that Fitzgerald recorded on the Reprise Records label. The album was released in March 1970, marking a distinct moment in Fitzgerald's discography as she navigated the transition away from her legendary Verve catalog years toward a new contractual phase. The record is anchored by the novelty title track, a spirited number from the Shelly Winters musical *Mr. Wonderful*, which became the centerpiece of the project's marketing. The album features a blend of jazz standards, pop tunes, and soul-influenced selections, arranged by musicians including Bill Holman and Bill Miller. While it did not match the commercial heights of her earlier collaborations or songbook series, the album is recognized for Fitzgerald's vocal performance, particularly on the title song, where her playful delivery and technical mastery shine. Production duties were handled by Chuck Bright, and the sessions were recorded at Capitol Studios in Hollywood. *Things Ain't What They Used to Be* was followed by *Ella... and Her Friends* on the Verve label, signaling her return to the home where she had recorded the majority of her most celebrated work. The album stands as a bridge in her career, capturing the sound of the early 1970s while reaffirming her status as the \"First Lady of Song\" even as the musical landscape shifted around her.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ],
-    "model": "qwen/qwen3.6-flash"
-  },
-  {
-    "full_text": "Swabhimaan Swaabhimaan is an Indian soap opera directed by Mahesh Bhatt, and scripted by Shobha Swabhimaan Swaabhimaan is an Indian soap opera directed by Mahesh Bhatt, and scripted by Shobha Bachchan. Set in the beautiful city of Pune in the year 1995, this exhilarating period drama takes viewers on a journey through the intensely personal, yet universally relatable stories of its characters. The show chronicles the lives of Uma, a hardworking and ambitious woman looking to find a husband, and Shlok, a struggling writer trying to make ends meet. Played by the talented Madhu and Manisha Yadav respectively, Uma and Shlok's paths cross in unexpected ways, leading to a series of events that test their love, friendship, and aspirations. The beautiful blend of music, romance, drama, and comedy makes the show immensely popular, bringing together a diverse cast of characters from various backgrounds, each with their own stories and dreams. As the couple navigates family pressures, societal expectations, and their professional challenges, Swabhimaan Swaabhimaan touches the hearts of its audience with its poignant storytelling, compelling character arcs, and rich cultural backdrop. With its vivid and vivid cinematography, the show beautifully recreates the ambiance of 1990s India, capturing the essence of the time with immaculate attention to detail. The gripping plotlines, combined with its engaging music, keep viewers hooked from start to finish. Mahesh Bhatt's direction beautifully brings out the nuances of each scene, making the writing and performances even more impactful. With stunning costume and set designs, it truly solidified its place in the hearts of viewers in the truest sense. Undoubtedly, Swabhimaan Swaabhimaan has left an indelible mark in Indian soap opera history, holding a special place in the hearts of many television enthusiasts. For those yearning to reminisce or experience the good old times, this visual and emotional marvel is an excellent addition to the grand library of television classics.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ],
-    "model": "microsoft/phi-4-mini-instruct"
-  },
-  {
-    "full_text": "Arequipa Province Arequipa Nestled in the Andean landscape of southern Peru, Arequipa Province stands out as a region rich in cultural and natural heritage. Known affectionately for its iconic volcanoes, this province blends prehistoric ruins with vibrant local traditions. Travelers often find themselves captivated by the region’s distinctive red sandstone architecture, a testament to the ingenuity of its ancient inhabitants. Beyond the historical sites, the area boasts diverse ecosystems, offering opportunities to explore lush valleys and untouched nature. Local markets and bustling food scenes add another layer to the community feel, making it a destination where tradition meets contemporary life. Understanding the nuances of this province can reveal why it stands as both a historical treasure and a living, evolving community.",
-    "labels": [
       0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1
+    ],
+    "model": "relace/relace-search"
+  },
+  {
+    "full_text": "Kingdom of Sussex The Kingdom of the South Saxons, today referred to as the Kingdom of Sussex (; ), was one of the seven traditional kingdoms of the Heptarchy of Anglo-Saxon England. On the south coast of the island of Great Britain, it was originally a sixth-century Saxon colony and later an independent kingdom. The South Saxons were ruled by the kings of Sussex until the country was annexed by Wessex, probably in 827, in the aftermath of the Battle of Ellandun. The Kingdom of Sussex Kingdom of Sussex The Kingdom of the South Saxons, today referred to as the Kingdom of Sussex (; ), was one of the seven traditional kingdoms of the Heptarchy of Anglo-Saxon England. On the south coast of the island of Great Britain, it was originally a sixth-century Saxon colony and later an independent kingdom. The South Saxons were ruled by the kings of Sussex until the country was annexed by Wessex, probably in 827, in the aftermath of the Battle of Ellandun. The Kingdom of Sussex eventually became absorbed into the expanding English nation during the tenth century consolidation, leaving archaeological traces and",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "nex-agi/deepseek-v3.1-nex-n1"
+  },
+  {
+    "full_text": "Things Ain't What They Used to Be (And You Better Believe It) Things Ain't What They Used to Be is a 1970 studio album by the American jazz singer Ella Fitzgerald - the final album that Fitzgerald recorded on the Reprise Records label. The album was recorded in Los Angeles with producer Richard Perry helmning the sessions. It features jazz and pop standards from the era, including collaborations with Louis Armstrong on several tracks like \"What a Wonderful World.\" The album showcased Fitzgerald's enduring vocal prowess despite evolving musical landscapes. Tracks like \"Ain't Misbehavin'\" and \"Blue Bossa\" highlighted her signature scat singing and impeccable timing. While not her most commercially successful work, it remains a significant entry in her discography, reflecting both her artistry and the transitional period in popular music during the late 1960s.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "prime-intellect/intellect-3"
+  },
+  {
+    "full_text": "Swabhimaan Swaabhimaan is an Indian soap opera directed by Mahesh Bhatt, and scripted by Shobha De and Vinod Ranganath. Swaabhimaan divulges the story of an attractive woman - Svetlana - who finds herself in a battle where there are no real winners. Insecurity, suspicion and fear threaten to erode her vivacious spirit as she struggles to come to terms with her position - that of a pampered wife in a wealthy household ruled by ego and ambition. Around her, relationships fracture under secrets, betrayals, and the hunger for power. As loyalties shift, Svetlana must decide whether comfort is worth the cost of silence. The series explores class, gender, and emotional manipulation, portraying how privilege can become a gilded cage. Through sharp dialogue and layered characters, Swaabhimaan captures the turbulence of modern family life. Its melodrama remains haunting, intimate, and relevant.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "openai/gpt-5.3-codex"
+  },
+  {
+    "full_text": "Arequipa Province Arequipa is a province in the Arequipa Region, Peru. Its capital, Arequipa, is Peru's third most populous city and a UNESCO World Heritage Site, known for its stunning colonial architecture and majestic volcanic backdrop.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "deepseek/deepseek-v3.2-exp"
+  },
+  {
+    "full_text": "Trelkówko Trelkówko () is a village in the administrative district of Gmina Szczytno, within Szczytno County, Warmian-Masurian Voivodeship, in northern Poland. Its economy relies mainly on agriculture, hosting a small primary school, an old brick church, and peaceful birch-lined roads inviting cyclists to rest beside quiet forests and ponds.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    ],
+    "model": "moonshotai/kimi-k2"
+  },
+  {
+    "full_text": "Klondike Highway The Klondike Highway is a highway that runs from the Alaska Panhandle through the province of British Columbia and the territory of Yukon Klondike Highway The Klondike Highway is a highway that runs from the Alaska Panhandle through the province of British Columbia and the territory of Yukon. It's a historic route, deeply intertwined with the Klondike Gold Rush of the late 1890s. Originally a trail, it evolved into a vital supply line for prospectors seeking fortune. Today, the highway offers breathtaking scenery, traversing mountains, forests, and alongside pristine rivers. It's a popular destination for adventurers, nature lovers, and those seeking a glimpse into the region's rich past – a testament to human resilience and the allure of discovery.",
+    "labels": [
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     ],
-    "model": "liquid/lfm-2.5-1.2b-instruct:free"
-  },
-  {
-    "full_text": "Trelkówko Trelkówko () is a village in the administrative district of Gmina Szczytno, within Trelkówko Trelkówko is a village in the administrative district of Gmina Szczytno, within Szczytno County, Warmian-Masurian Voivodeship, in northern Poland. The village is located approximately 10 kilometers southwest of Szczytno and 40 kilometers southeast of the regional capital Olsztyn. It is situated in the historic region of Masuria, known for its numerous lakes and forests.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
-    ],
-    "model": "mistralai/mistral-saba"
-  },
-  {
-    "full_text": "Klondike Highway The Klondike Highway is a highway that runs from the Alaska Panhandle through the province of British Columbia and the territory of Yukon in Canada, linking the coastal town of Skagway, Alaska to Dawson City, Yukon. Its route somewhat parallels the route used by prospectors in the 1898 Klondike Gold Rush. In both British Columbia and Yukon, the highway is marked as Yukon Highway 2. In Alaska, the Highway is marked as Alaska Route 98 (as in \"route of 1898\"). Until 1978, Until 1978, the Klondike Highway ended at the Yukon–British Columbia border near Carcross, and travelers heading to Dawson City had to rely on seasonal riverboats, winter ice roads, or air travel to complete the journey. That year, the Canadian government completed an extension of the highway northward through the Yukon, connecting Whitehorse to Dawson City and finally providing year-round road access to the historic gold rush town. This development transformed Dawson City from an isolated outpost into a more accessible destination, bolstering tourism and supporting local economic development while preserving its rich heritage tied to the Klondike Gold Rush era.",
-    "labels": [
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-      1, 1, 1, 1, 1, 1, 1, 1, 1
-    ],
-    "model": "qwen/qwen3-max-thinking"
+    "model": "google/gemma-3n-e4b-it"
   }
 ]
