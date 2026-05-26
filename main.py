@@ -2,16 +2,19 @@ import asyncio
 import json
 import os
 import random
+from dotenv import load_dotenv
 from openai import AsyncOpenAI
+
+load_dotenv()
 
 CONCURRENCY = 10
 
 
 def _get_client():
-    api_key = os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY")
+    api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
         raise RuntimeError(
-            "Missing API key. Set OPENROUTER_API_KEY (recommended) or OPENAI_API_KEY."
+            "Missing API key. Set OPENROUTER_API_KEY in your environment or .env file."
         )
 
     return AsyncOpenAI(
@@ -66,7 +69,7 @@ async def create_mixed_sequences(client, human_entries, concurrency=CONCURRENCY)
 
 async def main():
     input_path = "human_dataset_mini.json"
-    output_path = "mixed_dataset.json"
+    output_path = "mixed_dataset_mini.json"
 
     with open(input_path, encoding="utf-8") as f:
         human_entries = json.load(f)
