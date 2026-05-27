@@ -5,6 +5,7 @@ import os
 import random
 import time
 import urllib.request
+from contextlib import contextmanager
 from pathlib import Path
 
 import httpx
@@ -19,9 +20,35 @@ DEFAULT_SPLITS = ("train", "validation", "test")
 DEFAULT_CHUNK_SIZE = 1000
 MIN_TEXT_WORDS = 3
 MAX_MODEL_RETRIES = int(os.environ.get("OPENROUTER_MAX_RETRIES", "10"))
-MAX_RATE_LIMIT_WAITS = int(os.environ.get("OPENROUTER_MAX_RATE_WAITS", "20"))
-MAX_ENTRY_RETRIES = int(os.environ.get("OPENROUTER_ENTRY_RETRIES", "8"))
+MAX_ENTRY_RETRIES = int(os.environ.get("OPENROUTER_ENTRY_RETRIES", "12"))
+MAX_RATE_LIMIT_STRIKES = int(os.environ.get("OPENROUTER_RATE_LIMIT_STRIKES", "3"))
+MAX_TRANSIENT_RETRIES = int(os.environ.get("OPENROUTER_TRANSIENT_RETRIES", "20"))
+TRANSIENT_RETRY_BASE_SECONDS = float(
+    os.environ.get("OPENROUTER_TRANSIENT_RETRY_SECONDS", "5")
+)
 MODELS_API_URL = "https://openrouter.ai/api/v1/models?output_modalities=text"
+
+
+def timing_enabled():
+    return os.environ.get("OPENROUTER_TIMING", "1").lower() in ("1", "true", "yes")
+
+
+def log_timing_msg(label, seconds):
+    if timing_enabled():
+        print(f"[timing] {label}: {seconds:.2f}s", flush=True)
+
+
+@contextmanager
+def log_timing(label):
+    if not timing_enabled():
+        yield
+        return
+    start = time.perf_counter()
+    print(f"[timing] {label} ...", flush=True)
+    try:
+        yield
+    finally:
+        log_timing_msg(label, time.perf_counter() - start)
 
 
 def get_api_key():
@@ -41,12 +68,13 @@ def get_concurrency(total_entries):
 
 
 def get_client(api_key, concurrency):
+    timeout_seconds = float(os.environ.get("OPENROUTER_TIMEOUT", "180"))
     http_client = httpx.AsyncClient(
         limits=httpx.Limits(
             max_connections=concurrency + 10,
             max_keepalive_connections=concurrency,
         ),
-        timeout=httpx.Timeout(120.0),
+        timeout=httpx.Timeout(timeout_seconds),
     )
     return AsyncOpenAI(
         api_key=api_key,
@@ -78,12 +106,13 @@ def model_passes_cost_filter(model, free_only, max_prompt_price, max_completion_
 
 
 def fetch_chat_models(api_key, free_only=False, max_prompt_price=None, max_completion_price=None):
-    request = urllib.request.Request(
-        MODELS_API_URL,
-        headers={"Authorization": f"Bearer {api_key}"},
-    )
-    with urllib.request.urlopen(request) as response:
-        payload = json.load(response)
+    with log_timing("fetch_chat_models (OpenRouter /models API)"):
+        request = urllib.request.Request(
+            MODELS_API_URL,
+            headers={"Authorization": f"Bearer {api_key}"},
+        )
+        with urllib.request.urlopen(request) as response:
+            payload = json.load(response)
 
     models = []
     for model in payload["data"]:
@@ -148,7 +177,9 @@ def load_split_texts(data_dir, split, start=0, end=None, min_words=MIN_TEXT_WORD
     texts = []
     index = 0
     for file_path in files:
+        read_start = time.perf_counter()
         table = pq.read_table(file_path, columns=["text"])
+        log_timing_msg(f"read parquet {file_path.name}", time.perf_counter() - read_start)
         for text in table.column("text").to_pylist():
             if not text or not str(text).strip():
                 continue
@@ -172,25 +203,30 @@ def load_split_texts(data_dir, split, start=0, end=None, min_words=MIN_TEXT_WORD
     return texts
 
 
-def to_pytorch_chunk(entries, start_index):
+def to_pytorch_chunk(entries, indices):
+    if isinstance(indices, int):
+        indices = list(range(indices, indices + len(entries)))
     return {
         "texts": [entry["full_text"] for entry in entries],
         "labels": [
             torch.tensor(entry["labels"], dtype=torch.long) for entry in entries
         ],
         "models": [entry["model"] for entry in entries],
-        "indices": torch.arange(
-            start_index, start_index + len(entries), dtype=torch.long
-        ),
+        "indices": torch.tensor(indices, dtype=torch.long),
     }
 
 
-def save_pytorch_chunk(split, entries, output_dir, global_start):
+def save_pytorch_chunk(split, entries, output_dir, global_indices):
+    if not entries:
+        raise ValueError("Cannot save an empty chunk.")
+    if isinstance(global_indices, int):
+        global_indices = list(range(global_indices, global_indices + len(entries)))
     split_dir = Path(output_dir) / split
     split_dir.mkdir(parents=True, exist_ok=True)
-    global_end = global_start + len(entries) - 1
+    global_start = min(global_indices)
+    global_end = max(global_indices)
     output_path = split_dir / f"{split}_{global_start}_{global_end}.pt"
-    torch.save(to_pytorch_chunk(entries, global_start), output_path)
+    torch.save(to_pytorch_chunk(entries, global_indices), output_path)
     return output_path
 
 
@@ -268,8 +304,41 @@ def is_temporary_rate_limit(exc):
     )
 
 
+def is_transient_error(exc):
+    if isinstance(exc, (json.JSONDecodeError, APIConnectionError)):
+        return True
+    if isinstance(exc, (httpx.TimeoutException, httpx.TransportError)):
+        return True
+    if isinstance(exc, RuntimeError) and "all models unavailable" in str(exc).lower():
+        return True
+    return False
+
+
+def is_model_content_error(exc):
+    if isinstance(exc, json.JSONDecodeError):
+        return False
+    if not isinstance(exc, ValueError):
+        return False
+    message = str(exc).lower()
+    return "returned no choices" in message or "returned empty content" in message
+
+
+def is_non_retryable_entry_error(exc):
+    if isinstance(exc, ValueError):
+        message = str(exc)
+        return (
+            "words; need at least" in message
+            or "Could not produce begin, middle, and end" in message
+        )
+    return False
+
+
 def should_retry_with_another_model(exc):
-    if isinstance(exc, (ValueError, APIConnectionError, InternalServerError)):
+    if is_transient_error(exc):
+        return True
+    if is_model_content_error(exc):
+        return True
+    if isinstance(exc, InternalServerError):
         return True
     if isinstance(exc, (NotFoundError, RateLimitError)):
         return True
@@ -299,13 +368,132 @@ def should_retry_with_another_model(exc):
     return False
 
 
-def pick_model(models, failed_models):
-    available = [model for model in models if model not in failed_models]
-    if not available:
-        raise RuntimeError(
-            f"All {len(models)} models unavailable (daily limits or repeated errors)."
+class ModelBlacklist:
+    """Shared run-wide registry of models to skip after failures."""
+
+    def __init__(self):
+        self._permanent = set()
+        self._cooldown_until = {}
+        self._rate_limit_strikes = {}
+        self._lock = asyncio.Lock()
+
+    def is_blocked(self, model, now=None):
+        now = now or time.monotonic()
+        if model in self._permanent:
+            return True
+        until = self._cooldown_until.get(model)
+        return until is not None and now < until
+
+    def available_models(self, models, now=None):
+        now = now or time.monotonic()
+        return [model for model in models if not self.is_blocked(model, now)]
+
+    def seconds_until_available(self, models, now=None):
+        now = now or time.monotonic()
+        waits = [
+            self._cooldown_until[model] - now
+            for model in models
+            if model in self._cooldown_until and now < self._cooldown_until[model]
+        ]
+        return max(0.5, min(waits)) if waits else 0.0
+
+    def blocked_count(self, models):
+        now = time.monotonic()
+        return sum(1 for model in models if self.is_blocked(model, now))
+
+    def _log_registration(self, model, reason, models):
+        if not timing_enabled():
+            return
+        blocked = self.blocked_count(models)
+        print(
+            f"[blacklist] {model}: {reason} "
+            f"({blocked}/{len(models)} models blocked)",
+            flush=True,
         )
-    return random.choice(available)
+
+    async def register_failure(self, model, exc, models):
+        async with self._lock:
+            was_blocked = self.is_blocked(model)
+
+            if is_daily_quota_error(exc):
+                if model not in self._permanent:
+                    self._permanent.add(model)
+                    self._cooldown_until.pop(model, None)
+                    self._log_registration(model, "daily quota exhausted", models)
+                return
+
+            if is_rate_limit_error(exc):
+                strikes = self._rate_limit_strikes.get(model, 0) + 1
+                self._rate_limit_strikes[model] = strikes
+                if strikes >= MAX_RATE_LIMIT_STRIKES:
+                    wait = min(300.0, 30.0 * strikes)
+                    until = time.monotonic() + wait
+                    previous = self._cooldown_until.get(model, 0)
+                    self._cooldown_until[model] = max(previous, until)
+                    if model in self._permanent:
+                        self._permanent.discard(model)
+                    if not was_blocked:
+                        self._log_registration(
+                            model,
+                            f"rate-limited {strikes}x, cooldown {wait:.0f}s",
+                            models,
+                        )
+                    return
+
+                wait = parse_retry_after_seconds(exc)
+                until = time.monotonic() + wait
+                previous = self._cooldown_until.get(model, 0)
+                self._cooldown_until[model] = max(previous, until)
+                if not was_blocked:
+                    self._log_registration(
+                        model, f"rate-limited, cooldown {wait:.0f}s", models
+                    )
+                return
+
+            if is_model_content_error(exc):
+                wait = 30.0
+                until = time.monotonic() + wait
+                previous = self._cooldown_until.get(model, 0)
+                self._cooldown_until[model] = max(previous, until)
+                if not was_blocked:
+                    self._log_registration(
+                        model, f"empty response, cooldown {wait:.0f}s", models
+                    )
+                return
+
+            if should_blacklist_model_failure(exc):
+                if model not in self._permanent:
+                    self._permanent.add(model)
+                    self._cooldown_until.pop(model, None)
+                    if not was_blocked:
+                        self._log_registration(
+                            model,
+                            f"request failed ({exc.__class__.__name__})",
+                            models,
+                        )
+
+
+def should_blacklist_model_failure(exc):
+    if is_transient_error(exc) or is_model_content_error(exc):
+        return False
+    if is_rate_limit_error(exc) or is_daily_quota_error(exc):
+        return False
+    return should_retry_with_another_model(exc)
+
+
+async def pick_model(models, blacklist):
+    while True:
+        async with blacklist._lock:
+            available = blacklist.available_models(models)
+            if available:
+                return random.choice(available)
+            wait = blacklist.seconds_until_available(models)
+            if wait <= 0:
+                raise RuntimeError(
+                    f"All {len(models)} models unavailable (blacklisted or on cooldown)."
+                )
+        log_timing_msg("all models blocked, waiting for cooldown", wait)
+        await asyncio.sleep(wait)
 
 
 def extract_completion_text(response, model):
@@ -317,41 +505,50 @@ def extract_completion_text(response, model):
     return content.strip()
 
 
-async def generate_text(client, prompt, words_needed, models, semaphore, failed_models):
+async def generate_text(client, prompt, words_needed, models, semaphore, model_blacklist):
     max_tokens = max(64, int(words_needed * 2) + 20)
     last_error = None
     attempts = 0
-    rate_limit_waits = 0
+    transient_retries = 0
     max_attempts = max(MAX_MODEL_RETRIES, len(models))
 
     while attempts < max_attempts:
-        model = pick_model(models, failed_models)
+        model = await pick_model(models, model_blacklist)
+        if model_blacklist.is_blocked(model):
+            continue
         try:
+            api_start = time.perf_counter()
             async with semaphore:
+                if model_blacklist.is_blocked(model):
+                    continue
                 response = await client.chat.completions.create(
                     model=model,
                     messages=[{"role": "user", "content": prompt}],
                     max_tokens=max_tokens,
                 )
+            log_timing_msg(
+                f"OpenRouter chat.completions ({model}, attempt {attempts + 1})",
+                time.perf_counter() - api_start,
+            )
             return extract_completion_text(response, model), model
         except Exception as exc:
-            if is_temporary_rate_limit(exc):
-                if rate_limit_waits >= MAX_RATE_LIMIT_WAITS:
+            if is_transient_error(exc):
+                transient_retries += 1
+                if transient_retries > MAX_TRANSIENT_RETRIES:
                     raise RuntimeError(
-                        f"Rate limit persisted after {MAX_RATE_LIMIT_WAITS} waits."
+                        f"Transient errors persisted after {MAX_TRANSIENT_RETRIES} retries."
                     ) from exc
-                wait = parse_retry_after_seconds(exc)
-                rate_limit_waits += 1
+                wait = min(60.0, TRANSIENT_RETRY_BASE_SECONDS * transient_retries)
+                log_timing_msg(
+                    f"transient error ({exc.__class__.__name__}), retry in",
+                    wait,
+                )
                 await asyncio.sleep(wait)
-                continue
-            if is_rate_limit_error(exc):
-                failed_models.add(model)
-                attempts += 1
                 last_error = exc
                 continue
-            if not should_retry_with_another_model(exc):
+            await model_blacklist.register_failure(model, exc, models)
+            if not should_retry_with_another_model(exc) and not is_rate_limit_error(exc):
                 raise
-            failed_models.add(model)
             attempts += 1
             last_error = exc
 
@@ -372,12 +569,16 @@ async def run_sequences(
     chunk_size=DEFAULT_CHUNK_SIZE,
 ):
     semaphore = asyncio.Semaphore(concurrency)
-    failed_models = set()
+    model_blacklist = ModelBlacklist()
     total = len(entries)
     generated = 0
+    skipped = 0
     lock = asyncio.Lock()
     results = [None] * total
+    resolved = [False] * total
     saved_chunk_ids = set()
+    written_paths = []
+    saved_sample_count = 0
 
     def is_valid_result(result):
         return (
@@ -396,6 +597,7 @@ async def run_sequences(
         )
 
     def save_ready_chunks():
+        nonlocal saved_sample_count
         if split is None or output_dir is None:
             return
         for chunk_id in range((total + chunk_size - 1) // chunk_size):
@@ -403,26 +605,51 @@ async def run_sequences(
                 continue
             start = chunk_id * chunk_size
             end = min(start + chunk_size, total)
-            chunk = results[start:end]
-            if not all(item is not None for item in chunk):
+            if not all(resolved[i] for i in range(start, end)):
                 continue
-            path = save_pytorch_chunk(
-                split, chunk, output_dir, from_idx + start
-            )
+            chunk_entries = []
+            chunk_indices = []
+            for i in range(start, end):
+                if results[i] is None:
+                    continue
+                chunk_entries.append(results[i])
+                chunk_indices.append(from_idx + i)
             saved_chunk_ids.add(chunk_id)
+            if not chunk_entries:
+                print(
+                    f"\nChunk {from_idx + start}-{from_idx + end - 1}: all entries skipped.",
+                    flush=True,
+                )
+                continue
+            save_start = time.perf_counter()
+            path = save_pytorch_chunk(
+                split, chunk_entries, output_dir, chunk_indices
+            )
+            log_timing_msg(f"save chunk {path.name}", time.perf_counter() - save_start)
+            skipped_in_chunk = (end - start) - len(chunk_entries)
+            saved_sample_count += len(chunk_entries)
+            written_paths.append(path)
             for i in range(start, end):
                 results[i] = None
-            print(f"\nWrote {path}", flush=True)
+            if skipped_in_chunk:
+                print(
+                    f"\nSaved {path} ({len(chunk_entries)} samples, "
+                    f"{skipped_in_chunk} skipped in range)",
+                    flush=True,
+                )
+            else:
+                print(f"\nSaved {path} ({len(chunk_entries)} samples)", flush=True)
 
     async def run_one(index, entry):
-        nonlocal generated
+        nonlocal generated, skipped
         last_error = None
         global_index = from_idx + index
 
         for entry_attempt in range(MAX_ENTRY_RETRIES):
             try:
+                entry_start = time.perf_counter()
                 result = await create_one(
-                    client, entry, models, semaphore, failed_models
+                    client, entry, models, semaphore, model_blacklist
                 )
                 if not is_valid_result(result):
                     raise ValueError(
@@ -430,22 +657,47 @@ async def run_sequences(
                     )
                 async with lock:
                     results[index] = result
+                    resolved[index] = True
                     generated += 1
                     print_progress()
                     save_ready_chunks()
+                log_timing_msg(
+                    f"entry {global_index} total"
+                    + (
+                        f" (retry {entry_attempt + 1})"
+                        if entry_attempt > 0
+                        else ""
+                    ),
+                    time.perf_counter() - entry_start,
+                )
                 return
             except Exception as exc:
                 last_error = exc
+                if is_non_retryable_entry_error(exc):
+                    print(f"\nSkipping entry {global_index}: {exc}", flush=True)
+                    async with lock:
+                        resolved[index] = True
+                        skipped += 1
+                        save_ready_chunks()
+                    return
                 if entry_attempt + 1 >= MAX_ENTRY_RETRIES:
                     break
-                if is_daily_quota_error(exc) or "all models unavailable" in str(
+                if is_daily_quota_error(exc):
+                    break
+                if is_transient_error(exc) or "all models unavailable" in str(
                     exc
                 ).lower():
-                    break
-                wait = (
-                    parse_retry_after_seconds(exc)
-                    if is_temporary_rate_limit(exc)
-                    else 5 * (entry_attempt + 1)
+                    wait = max(
+                        model_blacklist.seconds_until_available(models),
+                        TRANSIENT_RETRY_BASE_SECONDS * (entry_attempt + 1),
+                    )
+                elif is_temporary_rate_limit(exc):
+                    wait = parse_retry_after_seconds(exc)
+                else:
+                    wait = 5 * (entry_attempt + 1)
+                log_timing_msg(
+                    f"entry {global_index} backoff before retry",
+                    wait,
                 )
                 print(
                     f"\nEntry {global_index} failed "
@@ -456,12 +708,33 @@ async def run_sequences(
                 await asyncio.sleep(wait)
 
         print(f"\nGiving up on entry {global_index}: {last_error}", flush=True)
+        async with lock:
+            resolved[index] = True
         raise last_error
 
-    await asyncio.gather(*(run_one(i, entry) for i, entry in enumerate(entries)))
+    with log_timing(f"run_sequences ({total} entries)"):
+        await asyncio.gather(*(run_one(i, entry) for i, entry in enumerate(entries)))
     save_ready_chunks()
     print()
-    return [result for result in results if result is not None]
+    print(
+        f"Done: {generated}/{total} generated, {skipped} skipped, "
+        f"{saved_sample_count} saved to disk.",
+        flush=True,
+    )
+    if written_paths:
+        for path in written_paths:
+            print(f"  {path}", flush=True)
+    elif split and output_dir and generated:
+        print(
+            f"  Warning: {generated} samples generated but no chunk file was written.",
+            flush=True,
+        )
+    if skipped:
+        print(
+            f"Skipped {skipped}/{total} entries (too short or unsplittable).",
+            flush=True,
+        )
+    return saved_sample_count
 
 
 def parse_args():
@@ -470,9 +743,9 @@ def parse_args():
     )
     parser.add_argument(
         "--mode",
-        choices=["append", "sandwitch"],
+        choices=["append", "sandwitch", "sandwitch_v2"],
         default=os.environ.get("GENERATION_MODE", "sandwitch"),
-        help="append: human+AI; sandwitch: human+AI+human.",
+        help="append: human+AI; sandwitch: human+AI+human; sandwitch_v2: summarize middle then regenerate.",
     )
     parser.add_argument(
         "--data-dir",

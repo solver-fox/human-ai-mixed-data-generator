@@ -13,7 +13,7 @@ def prepare_sequence(human_text):
     human_subtext = " ".join(human_words[:word_cutoff])
     words_needed = random.randint(ai_words_min, ai_words_max)
     prompt = (
-        f"Continue writing the following text naturally. Generate exactly {words_needed} words, "
+        f"Continue writing the following text naturally. Generate approximately {words_needed} words, "
         f"so that the final combined text reaches a grand total of {words_needed + word_cutoff} words. "
         f"Do not repeat the prompt or the input text:\n\n{human_subtext}"
     )
@@ -32,10 +32,10 @@ def build_result(human_words, word_cutoff, ai_text, model):
     }
 
 
-async def create_mixed_sequence(client, human_text, models, semaphore, failed_models):
+async def create_mixed_sequence(client, human_text, models, semaphore, model_blacklist):
     human_words, word_cutoff, prompt, words_needed = prepare_sequence(human_text)
     ai_text, model = await generate_text(
-        client, prompt, words_needed, models, semaphore, failed_models
+        client, prompt, words_needed, models, semaphore, model_blacklist
     )
     return build_result(human_words, word_cutoff, ai_text, model)
 
