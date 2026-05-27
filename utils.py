@@ -203,10 +203,10 @@ def load_split_texts(data_dir, split, start=0, end=None, min_words=MIN_TEXT_WORD
     return texts
 
 
-def to_pytorch_chunk(entries, indices):
+def to_pytorch_chunk(entries, indices, min_words_filter=None, generation_mode=None):
     if isinstance(indices, int):
         indices = list(range(indices, indices + len(entries)))
-    return {
+    chunk = {
         "texts": [entry["full_text"] for entry in entries],
         "labels": [
             torch.tensor(entry["labels"], dtype=torch.long) for entry in entries
@@ -214,9 +214,21 @@ def to_pytorch_chunk(entries, indices):
         "models": [entry["model"] for entry in entries],
         "indices": torch.tensor(indices, dtype=torch.long),
     }
+    if min_words_filter is not None:
+        chunk["min_words_filter"] = int(min_words_filter)
+    if generation_mode:
+        chunk["generation_mode"] = generation_mode
+    return chunk
 
 
-def save_pytorch_chunk(split, entries, output_dir, global_indices):
+def save_pytorch_chunk(
+    split,
+    entries,
+    output_dir,
+    global_indices,
+    min_words_filter=None,
+    generation_mode=None,
+):
     if not entries:
         raise ValueError("Cannot save an empty chunk.")
     if isinstance(global_indices, int):
@@ -226,7 +238,15 @@ def save_pytorch_chunk(split, entries, output_dir, global_indices):
     global_start = min(global_indices)
     global_end = max(global_indices)
     output_path = split_dir / f"{split}_{global_start}_{global_end}.pt"
-    torch.save(to_pytorch_chunk(entries, global_indices), output_path)
+    torch.save(
+        to_pytorch_chunk(
+            entries,
+            global_indices,
+            min_words_filter=min_words_filter,
+            generation_mode=generation_mode,
+        ),
+        output_path,
+    )
     return output_path
 
 
@@ -567,6 +587,8 @@ async def run_sequences(
     output_dir=None,
     from_idx=0,
     chunk_size=DEFAULT_CHUNK_SIZE,
+    min_words_filter=None,
+    generation_mode=None,
 ):
     semaphore = asyncio.Semaphore(concurrency)
     model_blacklist = ModelBlacklist()
@@ -623,7 +645,12 @@ async def run_sequences(
                 continue
             save_start = time.perf_counter()
             path = save_pytorch_chunk(
-                split, chunk_entries, output_dir, chunk_indices
+                split,
+                chunk_entries,
+                output_dir,
+                chunk_indices,
+                min_words_filter=min_words_filter,
+                generation_mode=generation_mode,
             )
             log_timing_msg(f"save chunk {path.name}", time.perf_counter() - save_start)
             skipped_in_chunk = (end - start) - len(chunk_entries)

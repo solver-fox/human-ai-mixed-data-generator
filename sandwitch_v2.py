@@ -207,5 +207,7 @@ async def create_sandwitch_v2_sequences(
         human_entries,
         models,
         concurrency,
+        min_words_filter=MIN_SANDWITCH_V2_WORDS,
+        generation_mode="sandwitch_v2",
         **save_kwargs,
     )

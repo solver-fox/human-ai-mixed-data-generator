@@ -47,5 +47,7 @@ async def create_mixed_sequences(client, human_entries, models, concurrency, **s
         human_entries,
         models,
         concurrency,
+        min_words_filter=3,
+        generation_mode="append",
         **save_kwargs,
     )

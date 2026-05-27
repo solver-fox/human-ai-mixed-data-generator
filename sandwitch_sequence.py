@@ -67,5 +67,7 @@ async def create_sandwitch_sequences(client, human_entries, models, concurrency,
         human_entries,
         models,
         concurrency,
+        min_words_filter=MIN_SANDWITCH_WORDS,
+        generation_mode="sandwitch",
         **save_kwargs,
     )
