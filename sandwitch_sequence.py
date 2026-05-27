@@ -1,55 +1,71 @@
+import os
 import random
 
-def _prepare_sandwich_sequence(human_text, target_total=35):
-    """
-    Slices human text to leave a gap in the middle for the AI to fill.
-    Maintains a final target word count.
-    """
+from utils import generate_text, run_sequences
+
+MIN_SANDWITCH_WORDS = 15
+
+
+def prepare_sandwitch_sequence(human_text):
+    """Slice human text into start + end segments with a gap for AI bridge text."""
+    ai_words_min = int(os.environ.get("OPENROUTER_AI_WORDS_MIN", "5"))
+    ai_words_max = int(os.environ.get("OPENROUTER_AI_WORDS_MAX", "100"))
     human_words = human_text.split()
     total_human_len = len(human_words)
-    
-    # 1. Enforce length boundaries to guarantee room for AI and trailing human text
-    # Human start (3-10 words), Human end (3-10 words)
-    start_cutoff = random.randint(3, min(10, total_human_len // 3))
-    end_cutoff = random.randint(3, min(10, total_human_len // 3))
-    
+    words_needed = random.randint(ai_words_min, ai_words_max)
+
+    max_start = min(10, total_human_len // 3)
+    start_cutoff = random.randint(3, max(3, max_start))
+    remaining = total_human_len - start_cutoff
+    max_end = min(10, remaining - 1)
+    end_cutoff = random.randint(3, max(3, max_end))
+
     human_start_tokens = human_words[:start_cutoff]
-    # Grab tokens from the end of the original text
     human_end_tokens = human_words[-end_cutoff:]
-    
     human_start_text = " ".join(human_start_tokens)
     human_end_text = " ".join(human_end_tokens)
-    
-    # 2. Calculate remaining word budget for the AI
-    current_human_count = len(human_start_tokens) + len(human_end_tokens)
-    words_needed_from_ai = max(5, target_total - current_human_count)
-    
-    # 3. Prompt instructing the LLM to bridge the specific gap
+
     prompt = (
         f"You are a text generation bridge. Read the START text and the END text below. "
-        f"Write exactly {words_needed_from_ai} words that seamlessly connect the START directly to the END. "
+        f"Write exactly {words_needed} words that seamlessly connect the START directly to the END. "
         f"Do not repeat the prompt, the start text, or the end text. Output ONLY your bridge text.\n\n"
         f"--- START ---\n{human_start_text}\n"
         f"--- END ---\n{human_end_text}"
     )
-    
-    # Return structures needed for the processing step
-    return human_start_tokens, human_end_tokens, prompt
+
+    return human_start_tokens, human_end_tokens, prompt, words_needed
 
 
-def format_to_target_schema(human_start, ai_middle, human_end, model_name="x-ai/grok-4.20"):
-    """
-    Combines text segments and outputs the exact requested JSON format.
-    """
-    start_words = human_start.strip().split()
-    middle_words = ai_middle.strip().split()
-    end_words = human_end.strip().split()
-    
-    full_text = " ".join(start_words + middle_words + end_words)
-    labels = * len(start_words) + * len(middle_words) + * len(end_words)
-    
+def build_sandwitch_result(human_start_tokens, human_end_tokens, ai_text, model):
+    ai_words = ai_text.split()
+    all_words = human_start_tokens + ai_words + human_end_tokens
+    labels = (
+        [0] * len(human_start_tokens)
+        + [1] * len(ai_words)
+        + [0] * len(human_end_tokens)
+    )
+
     return {
-        "full_text": full_text,
+        "full_text": " ".join(all_words),
         "labels": labels,
-        "model": model_name
+        "model": model,
     }
+
+
+async def create_sandwitch_sequence(client, human_text, models, semaphore, failed_models):
+    human_start, human_end, prompt, words_needed = prepare_sandwitch_sequence(human_text)
+    ai_text, model = await generate_text(
+        client, prompt, words_needed, models, semaphore, failed_models
+    )
+    return build_sandwitch_result(human_start, human_end, ai_text, model)
+
+
+async def create_sandwitch_sequences(client, human_entries, models, concurrency, **save_kwargs):
+    return await run_sequences(
+        create_sandwitch_sequence,
+        client,
+        human_entries,
+        models,
+        concurrency,
+        **save_kwargs,
+    )

@@ -1,17 +1,40 @@
 # Human–AI Mixed Data Generator
 
-Generate word-level labeled datasets for training models to detect where human-written text ends and AI-generated text begins. Human text comes from [MiniPile](https://huggingface.co/datasets/JeanKaddour/minipile); AI continuations are produced via [OpenRouter](https://openrouter.ai/) using a random model per sample.
-
-## How it works
-
-For each input text:
-
-1. Take a random prefix of the human text (3–100 words).
-2. Ask a randomly chosen LLM to continue writing naturally.
-3. Concatenate human prefix + AI continuation.
-4. Label each word: `0` = human, `1` = AI.
+Generate word-level labeled datasets for training models to detect human vs AI text. Human text comes from [MiniPile](https://huggingface.co/datasets/JeanKaddour/minipile); AI segments are produced via [OpenRouter](https://openrouter.ai/) using a random model per sample.
 
 Output is saved as **PyTorch `.pt` chunk files** (default 1000 samples per file), ready for `DataLoader` training.
+
+## Generation modes
+
+Two styles are supported via `--mode`:
+
+### `sandwitch` (default) — human + AI + human
+
+Implemented in `sandwitch_sequence.py`.
+
+1. Take a random prefix (3–10 words) and suffix (3–10 words) from the human text.
+2. Ask an LLM to write bridge text connecting start → end.
+3. Concatenate: **human start + AI bridge + human end**.
+4. Labels: `0` = human, `1` = AI.
+
+```
+[human start ...] [AI bridge ...] [human end ...]
+ 0 0 0 0 0 0 0     1 1 1 1 1       0 0 0 0 0 0
+```
+
+### `append` — human + AI
+
+Implemented in `mixed_sequence.py`.
+
+1. Take a random prefix of the human text (3–100 words).
+2. Ask an LLM to continue writing naturally.
+3. Concatenate: **human prefix + AI continuation**.
+4. Labels: `0` = human, `1` = AI.
+
+```
+[human prefix ...] [AI continuation ...]
+ 0 0 0 0 0 0 0       1 1 1 1 1 1
+```
 
 ## Setup
 
@@ -43,8 +66,16 @@ Then move or symlink parquet files into `dataset/minipile/data/`.
 
 ## Usage
 
+Sandwitch mode (default):
+
 ```bash
 python main.py --from 0 --to 1000
+```
+
+Append mode:
+
+```bash
+python main.py --mode append --from 0 --to 1000
 ```
 
 Process a specific index range for train, validation, and test:
@@ -63,6 +94,7 @@ python main.py --splits train --from 5000 --to 7000
 
 | Option | Default | Description |
 |--------|---------|-------------|
+| `--mode` | `sandwitch` | `append` (human+AI) or `sandwitch` (human+AI+human) |
 | `--data-dir` | `dataset/minipile/data` | Input parquet directory |
 | `--output-dir` | `output` | Output directory for `.pt` chunks |
 | `--splits` | `train,validation,test` | Comma-separated splits to process |
@@ -77,12 +109,13 @@ All CLI options can also be set in `.env` (see `.env.ex`):
 | Variable | Description |
 |----------|-------------|
 | `OPENROUTER_API_KEY` | OpenRouter API key (required) |
+| `GENERATION_MODE` | `append` or `sandwitch` (default: `sandwitch`) |
 | `OPENROUTER_CONCURRENCY` | Parallel API requests (default: `32`) |
 | `OPENROUTER_MODELS` | Optional comma-separated model list; if unset, models are chosen from the filtered pool |
 | `OPENROUTER_FREE_ONLY` | If `true`, only free models (`:free` or $0 pricing) |
 | `OPENROUTER_MAX_PROMPT_PRICE` | Max input price per token (USD) |
 | `OPENROUTER_MAX_COMPLETION_PRICE` | Max output price per token (USD) |
-| `OPENROUTER_AI_WORDS_MIN` / `MAX` | AI continuation length range (default 10–100) |
+| `OPENROUTER_AI_WORDS_MIN` / `MAX` | AI word count range (append default 10–100; sandwitch default 5–100) |
 | `MINIPILE_DATA_DIR` | Input data directory |
 | `MINIPILE_OUTPUT_DIR` | Output directory |
 | `MINIPILE_SPLITS` | Splits to process |
@@ -118,28 +151,31 @@ Each `.pt` file contains:
 
 ## Loading in PyTorch
 
-Use the included `pytorch_dataset.py` helper:
+Use `load_pt.py` or the notebook `load_pt.ipynb`:
 
 ```python
 from torch.utils.data import DataLoader
-from pytorch_dataset import load_split, MixedTextChunkDataset
+from load_pt import load_split, make_dataloader
 
-# Load all chunks for a split
+# All chunks for a split
 train_ds = load_split("output", "train")
 
-# Or load a single chunk
-chunk_ds = MixedTextChunkDataset("output/train/train_0_999.pt")
+# Index range only
+train_ds = load_split("output", "train", from_idx=0, to_idx=100)
 
-loader = DataLoader(train_ds, batch_size=32, shuffle=True)
-
-for batch in loader:
-    texts = batch["text"]      # list[str]
-    labels = batch["labels"]   # list[Tensor], one per sample (variable length)
-    models = batch["model"]      # list[str]
-    indices = batch["index"]   # Tensor of original dataset indices
+# DataLoader with padded labels (-1 = padding)
+loader = make_dataloader("output", "train", batch_size=32, shuffle=True)
+batch = next(iter(loader))
 ```
 
-Because label sequences vary in length, use a custom `collate_fn` if you need padded batches:
+Inspect chunks from the command line:
+
+```bash
+python load_pt.py output/train/train_0_999.pt --sample 2
+python load_pt.py --split train --output-dir output
+```
+
+Because label sequences vary in length, use a custom `collate_fn` if you need padded batches manually:
 
 ```python
 from torch.nn.utils.rnn import pad_sequence
@@ -148,8 +184,6 @@ def collate(batch):
     texts = [item["text"] for item in batch]
     labels = pad_sequence([item["labels"] for item in batch], batch_first=True, padding_value=-1)
     return {"text": texts, "labels": labels}
-
-loader = DataLoader(train_ds, batch_size=32, shuffle=True, collate_fn=collate)
 ```
 
 ## MiniPile split sizes
@@ -164,11 +198,11 @@ Use `--from` / `--to` to process manageable batches. The train split is large; s
 
 ## Saving OpenRouter balance
 
-At ~$1.50 per 100 texts with the default settings, processing all **1M train** samples would cost on the order of **$15,000**. The main reasons:
+At ~$1.50 per 100 texts with expensive models, processing all **1M train** samples would cost on the order of **$15,000**. The main reasons:
 
 1. **Random expensive models** — the default pool includes models like `o3-pro` and Claude Opus that cost far more than small/free models.
-2. **Every text is a unique request** — each sample sends a different human prefix, so OpenRouter cannot reuse one cached prompt across the whole run.
-3. **Long outputs** — the script asks for 10–100 AI words per sample (input + output tokens are both billed).
+2. **Every text is a unique request** — each sample sends a different prompt, so OpenRouter cannot reuse one cached prompt across the whole run.
+3. **Long outputs** — the script asks for many AI words per sample (input + output tokens are both billed).
 4. **Retries** — failed models trigger extra API calls.
 
 ### Recommended `.env` for large runs
@@ -177,6 +211,7 @@ At ~$1.50 per 100 texts with the default settings, processing all **1M train** s
 OPENROUTER_FREE_ONLY=true
 OPENROUTER_AI_WORDS_MIN=10
 OPENROUTER_AI_WORDS_MAX=40
+GENERATION_MODE=sandwitch
 ```
 
 Or pin a small set of cheap models:
@@ -211,17 +246,22 @@ With free models, marginal cost is **$0** (subject to rate limits). With cheap p
 ## Notes
 
 - Progress is printed as `Progress: N/M (X%)` while API requests run in parallel.
-- If a model fails (404, rate limit, etc.), another random model is tried automatically (up to 10 retries).
+- If a model fails (404, 500, rate limit, empty response, etc.), another random model is tried automatically (up to 10 retries).
 - Deprecated OpenRouter models and models with an `expiration_date` are excluded from the random pool.
 - API usage is billed through your OpenRouter account; cost depends on models selected and text volume.
 
 ## Project layout
 
 ```
-main.py              # Generator script
-pytorch_dataset.py   # PyTorch Dataset helpers
+main.py                # CLI entry point; orchestrates generation and saving
+utils.py               # OpenRouter client, data I/O, retries, parallel runner
+mixed_sequence.py      # append mode: human + AI
+sandwitch_sequence.py  # sandwitch mode: human + AI + human
+load_pt.py             # Load and inspect .pt chunk files
+load_pt.ipynb          # Notebook for exploring chunks vs original text
+pytorch_dataset.py     # Backward-compatible re-exports from load_pt.py
 requirements.txt
-.env.ex              # Environment variable template
-dataset/minipile/    # MiniPile source data (not committed)
-output/              # Generated .pt chunks (not committed)
+.env.ex                # Environment variable template
+dataset/minipile/      # MiniPile source data (not committed)
+output/                # Generated .pt chunks (not committed)
 ```
