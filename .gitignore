@@ -1,3 +1,5 @@
 .env
 dataset
 dataset/*
+**/*.pyc
+output/*
