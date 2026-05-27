@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import pyarrow.parquet as pq
 import torch
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import ConcatDataset, DataLoader, Dataset
@@ -142,6 +143,39 @@ def make_dataloader(
         shuffle=shuffle,
         num_workers=num_workers,
         collate_fn=collate_mixed_batch,
+    )
+
+
+def get_filtered_minipile_text(
+    data_dir: str | Path,
+    split: str,
+    index: int,
+    min_words: int = 3,
+) -> str:
+    """
+    Fetch text by filtered-stream index (same rules as utils.load_split_texts).
+
+    Skips empty rows and texts shorter than min_words, so index N matches
+    the Nth row that main.py would use, not the Nth raw parquet row.
+    """
+    if index < 0:
+        raise IndexError(f"Index must be >= 0, got {index}")
+
+    files = sorted(Path(data_dir).glob(f"{split}-*.parquet"))
+    seen = 0
+    for file_path in files:
+        table = pq.read_table(file_path, columns=["text"])
+        for text in table.column("text").to_pylist():
+            if not text or not str(text).strip():
+                continue
+            if len(str(text).split()) < min_words:
+                continue
+            if seen == index:
+                return str(text)
+            seen += 1
+    raise IndexError(
+        f"Filtered index {index} out of range for split '{split}' "
+        f"(only {seen} usable texts found)."
     )
 
 

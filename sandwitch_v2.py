@@ -154,9 +154,8 @@ def build_sandwitch_v2_result(begin, end, generated_middle, summary_model, gener
     begin_words = begin.split()
     middle_words = generated_middle.strip().split()
     end_words = end.split()
-    full_text = " ".join(
-        part for part in (begin.strip(), generated_middle.strip(), end.strip()) if part
-    )
+    all_words = begin_words + middle_words + end_words
+    full_text = " ".join(all_words)
     labels = [0] * len(begin_words) + [1] * len(middle_words) + [0] * len(end_words)
 
     return {
