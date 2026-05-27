@@ -343,6 +343,20 @@ def is_model_content_error(exc):
     return "returned no choices" in message or "returned empty content" in message
 
 
+def is_context_length_error(exc):
+    message = str(exc).lower()
+    return any(
+        marker in message
+        for marker in (
+            "context length",
+            "maximum context",
+            "max context",
+            "too many tokens",
+            "token limit",
+        )
+    )
+
+
 def is_non_retryable_entry_error(exc):
     if isinstance(exc, ValueError):
         message = str(exc)
@@ -350,7 +364,9 @@ def is_non_retryable_entry_error(exc):
             "words; need at least" in message
             or "Could not produce begin, middle, and end" in message
         )
-    return False
+    if isinstance(exc, APIStatusError) and exc.status_code == 400:
+        return is_context_length_error(exc)
+    return is_context_length_error(exc)
 
 
 def should_retry_with_another_model(exc):
@@ -595,6 +611,7 @@ async def run_sequences(
     total = len(entries)
     generated = 0
     skipped = 0
+    failed = 0
     lock = asyncio.Lock()
     results = [None] * total
     resolved = [False] * total
@@ -667,8 +684,40 @@ async def run_sequences(
             else:
                 print(f"\nSaved {path} ({len(chunk_entries)} samples)", flush=True)
 
+    def flush_unsaved_results():
+        """Save any successful results not yet written (e.g. after partial failures)."""
+        nonlocal saved_sample_count
+        if split is None or output_dir is None:
+            return
+        chunk_entries = []
+        chunk_indices = []
+        for i in range(total):
+            if results[i] is not None:
+                chunk_entries.append(results[i])
+                chunk_indices.append(from_idx + i)
+        if not chunk_entries:
+            return
+        save_start = time.perf_counter()
+        path = save_pytorch_chunk(
+            split,
+            chunk_entries,
+            output_dir,
+            chunk_indices,
+            min_words_filter=min_words_filter,
+            generation_mode=generation_mode,
+        )
+        log_timing_msg(f"save remaining {path.name}", time.perf_counter() - save_start)
+        saved_sample_count += len(chunk_entries)
+        written_paths.append(path)
+        print(
+            f"\nSaved remaining results to {path} ({len(chunk_entries)} samples)",
+            flush=True,
+        )
+        for i in range(total):
+            results[i] = None
+
     async def run_one(index, entry):
-        nonlocal generated, skipped
+        nonlocal generated, skipped, failed
         last_error = None
         global_index = from_idx + index
 
@@ -734,18 +783,26 @@ async def run_sequences(
                 )
                 await asyncio.sleep(wait)
 
-        print(f"\nGiving up on entry {global_index}: {last_error}", flush=True)
+        print(
+            f"\nSkipping entry {global_index} after {MAX_ENTRY_RETRIES} attempts: {last_error}",
+            flush=True,
+        )
         async with lock:
             resolved[index] = True
-        raise last_error
+            failed += 1
+            save_ready_chunks()
+        return
 
-    with log_timing(f"run_sequences ({total} entries)"):
-        await asyncio.gather(*(run_one(i, entry) for i, entry in enumerate(entries)))
-    save_ready_chunks()
+    try:
+        with log_timing(f"run_sequences ({total} entries)"):
+            await asyncio.gather(*(run_one(i, entry) for i, entry in enumerate(entries)))
+    finally:
+        save_ready_chunks()
+        flush_unsaved_results()
     print()
     print(
         f"Done: {generated}/{total} generated, {skipped} skipped, "
-        f"{saved_sample_count} saved to disk.",
+        f"{failed} failed, {saved_sample_count} saved to disk.",
         flush=True,
     )
     if written_paths:
@@ -761,6 +818,11 @@ async def run_sequences(
             f"Skipped {skipped}/{total} entries (too short or unsplittable).",
             flush=True,
         )
+    if failed:
+        print(
+            f"Failed {failed}/{total} entries (API errors after retries).",
+            flush=True,
+        )
     return saved_sample_count
 
 
@@ -770,9 +832,12 @@ def parse_args():
     )
     parser.add_argument(
         "--mode",
-        choices=["append", "sandwitch", "sandwitch_v2"],
+        choices=["append", "mixed_v2", "sandwitch", "sandwitch_v2"],
         default=os.environ.get("GENERATION_MODE", "sandwitch"),
-        help="append: human+AI; sandwitch: human+AI+human; sandwitch_v2: summarize middle then regenerate.",
+        help=(
+            "append: random-cutoff human+AI; mixed_v2: slice, summarize suffix, regenerate continuation; "
+            "sandwitch: human+AI+human; sandwitch_v2: summarize middle then regenerate."
+        ),
     )
     parser.add_argument(
         "--data-dir",

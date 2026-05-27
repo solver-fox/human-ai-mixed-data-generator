@@ -3,10 +3,11 @@ import time
 
 from dotenv import load_dotenv
 
-from mixed_sequence import create_mixed_sequences
-from sandwitch_sequence import MIN_SANDWITCH_WORDS, create_sandwitch_sequences
-from sandwitch_v2 import MIN_SANDWITCH_V2_WORDS, create_sandwitch_v2_sequences
-from utils import (
+from generator.mixed_sequence import create_mixed_sequences
+from generator.mixed_v2 import MIN_MIXED_V2_WORDS, create_mixed_v2_sequences
+from generator.sandwitch_sequence import MIN_SANDWITCH_WORDS, create_sandwitch_sequences
+from generator.sandwitch_v2 import MIN_SANDWITCH_V2_WORDS, create_sandwitch_v2_sequences
+from generator.utils import (
     get_api_key,
     get_client,
     get_concurrency,
@@ -21,6 +22,7 @@ load_dotenv()
 
 SEQUENCE_CREATORS = {
     "append": create_mixed_sequences,
+    "mixed_v2": create_mixed_v2_sequences,
     "sandwitch": create_sandwitch_sequences,
     "sandwitch_v2": create_sandwitch_v2_sequences,
 }
@@ -40,6 +42,8 @@ async def main():
             min_words = MIN_SANDWITCH_WORDS
         elif args.mode == "sandwitch_v2":
             min_words = MIN_SANDWITCH_V2_WORDS
+        elif args.mode == "mixed_v2":
+            min_words = MIN_MIXED_V2_WORDS
         else:
             min_words = None
 
@@ -70,7 +74,7 @@ async def main():
 
             print(f"\n{split}: {len(human_entries)} entries, {concurrency} parallel requests")
             try:
-                await create_sequences(
+                saved_count = await create_sequences(
                     client,
                     human_entries,
                     models,
@@ -84,6 +88,11 @@ async def main():
                 close_start = time.perf_counter()
                 await client.close()
                 log_timing_msg("client.close", time.perf_counter() - close_start)
+            if saved_count == 0:
+                raise SystemExit(
+                    f"No samples saved for split '{split}'. "
+                    "Check logs for skipped/failed entries."
+                )
 
 
 if __name__ == "__main__":

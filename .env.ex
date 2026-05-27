@@ -1,5 +1,5 @@
 OPENROUTER_API_KEY=your_openrouter_api_key_here
-OPENROUTER_CONCURRENCY=32
+OPENROUTER_CONCURRENCY=128
 # Cost control (recommended for large runs):
 OPENROUTER_FREE_ONLY=true
 OPENROUTER_AI_WORDS_MIN=10
@@ -13,4 +13,4 @@ MINIPILE_SPLITS=train,validation,test
 MINIPILE_FROM=0
 MINIPILE_TO=1000
 MINIPILE_CHUNK_SIZE=1000
-GENERATION_MODE=sandwitch # append or sandwitch
+GENERATION_MODE=sandwitch # append, mixed_v2, sandwitch, or sandwitch_v2

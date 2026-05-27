@@ -5,6 +5,22 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+__all__ = [
+    "MixedTextChunkDataset",
+    "chunks_in_range",
+    "collate_mixed_batch",
+    "find_filtered_index_by_human_start",
+    "get_filtered_minipile_text",
+    "list_chunks",
+    "load_chunk",
+    "load_split",
+    "lookup_original_for_sample",
+    "make_dataloader",
+    "parse_chunk_range",
+    "summarize_chunk",
+    "words_start_equal",
+]
+
 import pyarrow.parquet as pq
 import torch
 from torch.nn.utils.rnn import pad_sequence
