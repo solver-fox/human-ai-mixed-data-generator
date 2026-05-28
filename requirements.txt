@@ -3,3 +3,7 @@ python-dotenv
 httpx
 pyarrow
 torch
+transformers
+datasets
+evaluate
+accelerate

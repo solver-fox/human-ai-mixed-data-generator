@@ -4,3 +4,4 @@ dataset/*
 **/*.pyc
 output/*
 pickles/*
+models/*
