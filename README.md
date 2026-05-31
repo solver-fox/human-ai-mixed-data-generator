@@ -265,3 +265,29 @@ requirements.txt
 dataset/minipile/      # MiniPile source data (not committed)
 output/                # Generated .pt chunks (not committed)
 ```
+
+
+# Checkpoint 2 on full test set
+python validate_token_model.py --model-dir output/dactyl_token_finetuned/2
+
+# Checkpoint 1 on validation split
+python validate_token_model.py \
+  --model-dir output/dactyl_token_finetuned/1 \
+  --data pickles/validation_samples.pkl
+
+# Quick smoke test
+python validate_token_model.py \
+  --model-dir output/dactyl_token_finetuned/2 \
+  --max-samples 200
+
+
+# Easiest — auto-detects foundation + .pth
+python validate_token_model.py --model-dir llm-detection/models
+
+# Also works
+python validate_token_model.py --model-dir llm-detection/models/deberta-v3-large-hf-weights
+
+# Explicit
+python validate_token_model.py \
+  --model-dir llm-detection/models/deberta-v3-large-hf-weights \
+  --weights-path llm-detection/models/deberta-large-ls03-ctx1024.pth

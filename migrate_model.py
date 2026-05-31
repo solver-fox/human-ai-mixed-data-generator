@@ -1,14 +1,20 @@
 import argparse
 import gc
 import json
+import shutil
 from pathlib import Path
 
 import torch
-from transformers import (
-    AutoConfig,
-    AutoModelForSequenceClassification,
-    AutoModelForTokenClassification,
-    AutoTokenizer,
+from safetensors.torch import save_file
+from transformers import AutoConfig
+
+
+TOKENIZER_FILES = (
+    "tokenizer.json",
+    "tokenizer_config.json",
+    "spm.model",
+    "special_tokens_map.json",
+    "added_tokens.json",
 )
 
 
@@ -34,7 +40,63 @@ def parse_args():
         default=Path("models/DACTYL"),
         help="Fallback base model directory if meta has invalid path.",
     )
+    parser.add_argument(
+        "--verify",
+        action="store_true",
+        help="Load the saved HF model after export (uses extra RAM).",
+    )
     return parser.parse_args()
+
+
+def copy_tokenizer_files(src_dir: Path, dst_dir: Path, fallback_dir: Path) -> None:
+    for name in TOKENIZER_FILES:
+        src = src_dir / name
+        if not src.exists():
+            src = fallback_dir / name
+        if src.exists():
+            shutil.copy2(src, dst_dir / name)
+
+
+def migrate_low_memory(
+    src_weights: Path,
+    dst_dir: Path,
+    base_model_dir: Path,
+    num_labels: int,
+) -> None:
+    """Write weights/config/tokenizer without instantiating a full model in RAM."""
+    cfg = AutoConfig.from_pretrained(base_model_dir)
+    cfg.num_labels = num_labels
+    cfg.id2label = {0: "human", 1: "ai"}
+    cfg.label2id = {"human": 0, "ai": 1}
+
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    cfg.save_pretrained(dst_dir)
+
+    print("Loading checkpoint (mmap)...")
+    state = torch.load(
+        src_weights,
+        map_location="cpu",
+        mmap=True,
+        weights_only=True,
+    )
+
+    model_path = dst_dir / "model.safetensors"
+    print(f"Writing {model_path} ...")
+    save_file(state, model_path)
+    del state
+    gc.collect()
+
+    copy_tokenizer_files(src_dir=src_weights.parent, dst_dir=dst_dir, fallback_dir=base_model_dir)
+    print("Copied tokenizer files.")
+
+
+def verify_export(dst_dir: Path) -> None:
+    from transformers import AutoModelForTokenClassification
+
+    print("Verifying export (loads full model)...")
+    model = AutoModelForTokenClassification.from_pretrained(dst_dir, device_map="cpu")
+    del model
+    gc.collect()
 
 
 def main():
@@ -66,48 +128,27 @@ def main():
         print(f"Warning: invalid base model in meta: {base_model_dir}")
         base_model_dir = base_fallback
 
-    gc.collect()
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-
     print(f"Source checkpoint: {src_weights}")
-    print(f"Base model: {base_model_dir}")
+    print(f"Base model (config only): {base_model_dir}")
     print(f"Destination: {dst_dir}")
+    print("Mode: low-memory (direct safetensors write, no duplicate model load)")
 
-    cfg = AutoConfig.from_pretrained(base_model_dir)
-    cfg.num_labels = num_labels
-    cfg.id2label = {0: "human", 1: "ai"}
-    cfg.label2id = {"human": 0, "ai": 1}
-
-    hf_model = AutoModelForTokenClassification.from_config(cfg).cpu()
-    base_seq = AutoModelForSequenceClassification.from_pretrained(
-        base_model_dir, device_map="cpu"
+    migrate_low_memory(
+        src_weights=src_weights,
+        dst_dir=dst_dir,
+        base_model_dir=base_model_dir,
+        num_labels=num_labels,
     )
-    hf_model.deberta.load_state_dict(base_seq.deberta.state_dict(), strict=True)
-
-    state = torch.load(src_weights, map_location="cpu")
-    load_info = hf_model.load_state_dict(state, strict=False)
-    print("Missing keys:", load_info.missing_keys)
-    print("Unexpected keys:", load_info.unexpected_keys)
-
-    if any(key.startswith("classifier") for key in load_info.missing_keys):
-        raise RuntimeError(
-            f"Classifier weights missing after load: {load_info.missing_keys}"
-        )
-
-    dst_dir.mkdir(parents=True, exist_ok=True)
-    hf_model.save_pretrained(dst_dir)
-
-    tokenizer_src = src_dir if src_dir.joinpath("tokenizer_config.json").exists() else base_model_dir
-    tokenizer = AutoTokenizer.from_pretrained(tokenizer_src)
-    tokenizer.save_pretrained(dst_dir)
 
     print(f"Migrated model saved to: {dst_dir}")
     print("Files:")
     for path in sorted(dst_dir.iterdir()):
-        print(f"  - {path.name}")
+        size_mb = path.stat().st_size / (1024 * 1024)
+        print(f"  - {path.name} ({size_mb:.1f} MB)")
 
-    del base_seq, hf_model, state
+    if args.verify:
+        verify_export(dst_dir)
+
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()

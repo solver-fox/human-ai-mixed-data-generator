@@ -7,3 +7,4 @@ transformers
 datasets
 evaluate
 accelerate
+scikit-learn
