@@ -1,7 +1,7 @@
 import os
 import random
 
-from .utils import generate_text, run_sequences
+from utils import generate_text, run_sequences
 
 
 def prepare_sequence(human_text):

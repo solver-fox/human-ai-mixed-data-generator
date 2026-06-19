@@ -6,11 +6,11 @@ Output is saved as **PyTorch `.pt` chunk files** (default 1000 samples per file)
 
 ## Generation modes
 
-Two styles are supported via `--mode`:
+Four styles are supported via `--mode`:
 
 ### `sandwitch` (default) — human + AI + human
 
-Implemented in `sandwitch_sequence.py`.
+Implemented in `generator/sandwitch_sequence.py`.
 
 1. Take a random prefix (3–10 words) and suffix (3–10 words) from the human text.
 2. Ask an LLM to write bridge text connecting start → end.
@@ -24,7 +24,7 @@ Implemented in `sandwitch_sequence.py`.
 
 ### `append` — human + AI
 
-Implemented in `mixed_sequence.py`.
+Implemented in `generator/mixed_sequence.py`.
 
 1. Take a random prefix of the human text (3–100 words).
 2. Ask an LLM to continue writing naturally.
@@ -66,35 +66,35 @@ Then move or symlink parquet files into `dataset/minipile/data/`.
 
 ## Usage
 
-Sandwitch mode (default):
+Run from the project root. Default mode is `sandwitch`; indices 0–999 are processed for each split in `--splits` (default: train, validation, test):
 
 ```bash
-python main.py --from 0 --to 1000
+python 1_data_generate.py --from 0 --to 1000
 ```
 
 Append mode:
 
 ```bash
-python main.py --mode append --from 0 --to 1000
+python 1_data_generate.py --mode append --from 0 --to 1000
 ```
 
 Process a specific index range for train, validation, and test:
 
 ```bash
-python main.py --from 0 --to 2500 --splits train,validation,test
+python 1_data_generate.py --from 0 --to 2500 --splits train,validation,test
 ```
 
 Only the train split, indices 5000–6999:
 
 ```bash
-python main.py --splits train --from 5000 --to 7000
+python 1_data_generate.py --splits train --from 5000 --to 7000
 ```
 
 ### CLI options
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--mode` | `sandwitch` | `append` (human+AI) or `sandwitch` (human+AI+human) |
+| `--mode` | `sandwitch` | `append`, `mixed_v2`, `sandwitch`, or `sandwitch_v2` |
 | `--data-dir` | `dataset/minipile/data` | Input parquet directory |
 | `--output-dir` | `output` | Output directory for `.pt` chunks |
 | `--splits` | `train,validation,test` | Comma-separated splits to process |
@@ -109,7 +109,7 @@ All CLI options can also be set in `.env` (see `.env.ex`):
 | Variable | Description |
 |----------|-------------|
 | `OPENROUTER_API_KEY` | OpenRouter API key (required) |
-| `GENERATION_MODE` | `append` or `sandwitch` (default: `sandwitch`) |
+| `GENERATION_MODE` | `append`, `mixed_v2`, `sandwitch`, or `sandwitch_v2` (default: `sandwitch`) |
 | `OPENROUTER_CONCURRENCY` | Parallel API requests (default: `32`) |
 | `OPENROUTER_MODELS` | Optional comma-separated model list; if unset, models are chosen from the filtered pool |
 | `OPENROUTER_FREE_ONLY` | If `true`, only free models (`:free` or $0 pricing) |
@@ -151,11 +151,11 @@ Each `.pt` file contains:
 
 ## Loading in PyTorch
 
-Use `load_pt.py` or the notebook `load_pt.ipynb`:
+Use `generator/load_pt.py` or the notebook `generator/load_pt.ipynb`:
 
 ```python
 from torch.utils.data import DataLoader
-from load_pt import load_split, make_dataloader
+from generator.load_pt import load_split, make_dataloader
 
 # All chunks for a split
 train_ds = load_split("output", "train")
@@ -171,8 +171,8 @@ batch = next(iter(loader))
 Inspect chunks from the command line:
 
 ```bash
-python load_pt.py output/train/train_0_999.pt --sample 2
-python load_pt.py --split train --output-dir output
+python generator/load_pt.py output/train/train_0_999.pt --sample 2
+python generator/load_pt.py --split train --output-dir output
 ```
 
 Because label sequences vary in length, use a custom `collate_fn` if you need padded batches manually:
@@ -253,13 +253,16 @@ With free models, marginal cost is **$0** (subject to rate limits). With cheap p
 ## Project layout
 
 ```
-main.py                # CLI entry point; orchestrates generation and saving
-utils.py               # OpenRouter client, data I/O, retries, parallel runner
-mixed_sequence.py      # append mode: human + AI
-sandwitch_sequence.py  # sandwitch mode: human + AI + human
-load_pt.py             # Load and inspect .pt chunk files
-load_pt.ipynb          # Notebook for exploring chunks vs original text
-pytorch_dataset.py     # Backward-compatible re-exports from load_pt.py
+1_data_generate.py     # CLI entry point; orchestrates generation and saving
+generator/
+  utils.py             # OpenRouter client, data I/O, retries, parallel runner
+  mixed_sequence.py    # append mode: human + AI
+  mixed_v2.py          # append v2: summarize suffix, regenerate continuation
+  sandwitch_sequence.py  # sandwitch mode: human + AI + human
+  sandwitch_v2.py      # sandwitch v2: summarize middle, regenerate bridge
+  load_pt.py           # Load and inspect .pt chunk files
+  load_pt.ipynb        # Notebook for exploring chunks vs original text
+  pytorch_dataset.py   # Backward-compatible re-exports from load_pt.py
 requirements.txt
 .env.ex                # Environment variable template
 dataset/minipile/      # MiniPile source data (not committed)

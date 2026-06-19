@@ -2,7 +2,7 @@ import os
 import random
 import re
 
-from .utils import generate_text, run_sequences
+from utils import generate_text, run_sequences
 
 MIN_SANDWITCH_V2_WORDS = 30
 MIN_SANDWITCH_V2_SENTENCES = 3

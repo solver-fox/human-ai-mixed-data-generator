@@ -1,4 +1,4 @@
-"""Load PyTorch chunk files produced by 1_data_generate.py."""
+"""Load PyTorch chunk files produced by main.py."""
 
 from __future__ import annotations
 
@@ -260,7 +260,7 @@ def get_filtered_minipile_text(
     Fetch text by filtered-stream index (same rules as utils.load_split_texts).
 
     Skips empty rows and texts shorter than min_words, so index N matches
-    the Nth row that 1_data_generate.py would use, not the Nth raw parquet row.
+    the Nth row that main.py would use, not the Nth raw parquet row.
     """
     if index < 0:
         raise IndexError(f"Index must be >= 0, got {index}")

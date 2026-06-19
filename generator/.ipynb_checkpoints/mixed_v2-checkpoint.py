@@ -1,8 +1,8 @@
 import os
 import random
 
-from .sandwitch_v2 import get_sentences
-from .utils import generate_text, run_sequences
+from sandwitch_v2 import get_sentences
+from utils import generate_text, run_sequences
 
 MIN_MIXED_V2_WORDS = 30
 MIN_MIXED_V2_SENTENCES = 2

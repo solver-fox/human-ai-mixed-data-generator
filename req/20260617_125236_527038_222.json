@@ -1,0 +1,9 @@
+{
+  "timestamp": "20260617_125236_527038",
+  "validator_uid": 222,
+  "validator_hotkey": "5DWtZGXjtx3KnLcbEfjy93aNjj4ADNMhqoyeHzrb3NfWXhhu",
+  "version": "3.14.0",
+  "texts": [
+    "u mean \"${fieldName} { ... }\"? references: spec: http://facebook.github.io/graphql/June2018/#sec-Leaf-Field-Selections implementation: https://github.com/graphql/graphql-js/blob/master/src/validation/rules/ScalarLeafs.js noSubselectionAllowed: message: Field \"${fieldName}\" must not have a selection since type \"${type}\" has no subfields. references: spec: http://facebook.github.io/graphql/June2018/#sec-Leaf-Field-Selections implementation: https://github.com/graphql/graphql-js/blob/master/src/validation/rules/ScalarLeafs.js nonExecutableDefinition: message: The ${defName} definition is not executable. references: spec: http://facebook.github.io/graphql/June2018/#sec-Executable-Definitions implementation: https://github.com/gTo"
+  ]
+}

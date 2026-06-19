@@ -4,11 +4,7 @@ httpx
 pyarrow
 torch
 transformers
-sentencepiece
-protobuf
 datasets
 evaluate
-accelerate>=1.1.0
-ipywidgets
-tqdm
+accelerate
 scikit-learn
